@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Open Summit 2026: IA + Ecommerce para Emprendedores | Gobierno Regional Metropolitano de Lima x Hugo López</title>
-  <meta name="description" content="Base de Conocimientos Integral — Inteligencia artificial + ecommerce para emprendedores. Open Summit · Gobierno Regional Metropolitano de Lima · Expositor: Hugo López (El Marketero del Pueblo)." />
+  <title>IA + Ecommerce para Emprendedores | Open Summit · Hugo López</title>
+  <meta name="description" content="Inteligencia Artificial + Ecommerce para Emprendedores. Open Summit — Gobierno Regional Metropolitano de Lima. Expositor: Hugo López (El Marketero del Pueblo)." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
     .prompt-box {
       background: #0d1117;
       border: 1px solid #30363d;
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 2rem;
       font-family: 'Fira Code', monospace;
     }
@@ -51,9 +51,9 @@
       Calendar, MapPin, Clock, Bot, Smartphone,
       Video, CheckCircle, ArrowRight, Check,
       MessageCircle, Award, Film, Wand2, Zap, Users, Layers,
-      Copy, Sparkles, Search, BarChart3, HelpCircle,
-      UserCheck, Wrench, Truck, Radio, Gift, Building2, CheckSquare, ArrowUpRight,
-      ShoppingBag, DollarSign, Megaphone, Globe, AlertTriangle, FileText, Compass, Lightbulb, Target, Camera, ShieldCheck
+      Copy, Sparkles, Search, BarChart3,
+      UserCheck, Radio, Gift, Building2, ArrowUpRight,
+      ShoppingBag, DollarSign, Megaphone, Globe, Lightbulb, Target, Camera, ShieldCheck, Star
     } from 'https://esm.sh/lucide-react@0.454.0?deps=react@18.3.1';
 
     const html = htm.bind(React.createElement);
@@ -61,7 +61,7 @@
     const HUGO_PHOTO = "https://img.wpfc.ml/90d/sd/cmrc7p.png";
     const GOV_LOGO = "https://img.wpfc.ml/90d/se/cs0dxu.jpg";
 
-    const CopyButton = ({ text, colorClass = "bg-emerald-900/60 hover:bg-emerald-600 text-emerald-200" }) => {
+    const CopyButton = ({ text, colorClass = "bg-emerald-900/70 hover:bg-emerald-600 text-emerald-200" }) => {
       const [copied, setCopied] = useState(false);
       const handleCopy = () => {
         if (navigator?.clipboard) {
@@ -73,110 +73,90 @@
       return html`
         <button
           onClick=${handleCopy}
-          className=${`absolute top-4 right-4 ${colorClass} px-4 py-2 rounded-lg flex items-center gap-2 font-bold text-sm transition-colors z-10 shadow-lg`}
+          className=${`absolute top-5 right-5 ${colorClass} px-5 py-2.5 rounded-xl flex items-center gap-2 font-bold text-sm transition-colors z-10 shadow-lg`}
         >
           ${copied ? html`<${Check} className="w-4 h-4"/>` : html`<${Copy} className="w-4 h-4"/>`}
-          ${copied ? "¡Copiado!" : "Copiar"}
+          ${copied ? "¡Copiado!" : "Copiar Prompt"}
         </button>
       `;
     };
 
+    /* =========================================================================
+       HEADER: LIMPIO, ESPACIADO Y CON UN SOLO LOGO A LA IZQUIERDA
+       ========================================================================= */
     const Header = () => html`
       <header className="bg-[#0f172a]/95 backdrop-blur-md text-white fixed w-full top-0 z-50 shadow-2xl border-b-[4px] border-[#f59e0b] transition-all">
-        <div className="container mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center max-w-[1800px]">
-          <div className="flex items-center space-x-4">
-            <div className="bg-white p-1.5 sm:p-2 rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-              <img src=${GOV_LOGO} alt="Logo Gobierno Regional Metropolitano de Lima" className="h-9 sm:h-11 w-auto object-contain rounded" />
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center max-w-[1800px]">
+          <div className="flex items-center space-x-5">
+            <div className="bg-white p-2 rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+              <img src=${GOV_LOGO} alt="Logo Gobierno Regional Metropolitano de Lima" className="h-10 sm:h-12 w-auto object-contain" />
             </div>
-            <div className="flex flex-col border-l-[3px] border-[#f59e0b] pl-4">
-              <span className="text-xl sm:text-2xl font-black tracking-tighter leading-none flex items-center">
+            <div className="flex flex-col border-l-[3px] border-[#f59e0b] pl-5">
+              <span className="text-2xl font-black tracking-tighter leading-none flex items-center">
                 OPEN<span className="text-[#00aeef] ml-1">SUMMIT</span>
               </span>
-              <span className="text-[11px] font-bold tracking-widest text-[#f59e0b] uppercase mt-1">Gobierno Regional Metropolitano de Lima</span>
+              <span className="text-xs font-bold tracking-widest text-[#f59e0b] uppercase mt-1">Edición Emprendedores 2026</span>
             </div>
           </div>
-          <nav className="hidden xl:flex space-x-4 text-xs font-black items-center uppercase tracking-wider text-slate-300">
-            <a href="#proposito" className="hover:text-white transition-colors flex items-center gap-1"><${Layers} className="w-3.5 h-3.5 text-[#f59e0b]"/> 1-3. Propósito</a>
-            <a href="#ecommerce" className="hover:text-[#00aeef] transition-colors flex items-center gap-1"><${ShoppingBag} className="w-3.5 h-3.5 text-[#00aeef]"/> 4-5. Ecommerce</a>
-            <a href="#investigacion" className="hover:text-[#f59e0b] transition-colors flex items-center gap-1"><${Search} className="w-3.5 h-3.5 text-[#f59e0b]"/> 6-7. Búsquedas</a>
-            <a href="#skills" className="hover:text-purple-400 transition-colors flex items-center gap-1"><${Sparkles} className="w-3.5 h-3.5 text-purple-400"/> 8-9. Skills & Flow</a>
-            <a href="#flow-visual" className="hover:text-purple-400 transition-colors flex items-center gap-1"><${Wand2} className="w-3.5 h-3.5 text-purple-400"/> 10-13. Producción IA</a>
-            <a href="#tiktok" className="hover:text-rose-400 transition-colors flex items-center gap-1"><${Video} className="w-3.5 h-3.5 text-rose-400"/> 14-16. TikTok & LIVE</a>
-            <a href="#whatsapp" className="hover:text-[#25D366] transition-colors flex items-center gap-1"><${Smartphone} className="w-3.5 h-3.5 text-[#25D366]"/> 17-18. WhatsApp & IA</a>
-            <a href="#margen" className="hover:text-emerald-400 transition-colors flex items-center gap-1"><${DollarSign} className="w-3.5 h-3.5 text-emerald-400"/> 19-22. Pedido & Margen</a>
-            <a href="#analitica" className="hover:text-[#00aeef] transition-colors flex items-center gap-1"><${BarChart3} className="w-3.5 h-3.5 text-[#00aeef]"/> 23-27. Analítica</a>
-            <a href="#casos" className="hover:text-white transition-colors flex items-center gap-1"><${CheckSquare} className="w-3.5 h-3.5 text-[#f59e0b]"/> 28-31. Plan 7D</a>
-            <a href="#regalo" className="hover:text-[#f59e0b] transition-colors flex items-center gap-1"><${Gift} className="w-3.5 h-3.5 text-[#f59e0b]"/> 32-36. Regalo</a>
+          <nav className="hidden xl:flex space-x-10 text-sm font-black items-center uppercase tracking-widest text-slate-300">
+            <a href="#expositor" className="hover:text-white transition-colors flex items-center gap-2"><${UserCheck} className="w-4 h-4 text-[#00aeef]"/> El Expositor</a>
+            <a href="#ecommerce" className="hover:text-[#00aeef] transition-colors flex items-center gap-2"><${ShoppingBag} className="w-4 h-4 text-[#00aeef]"/> Ecommerce</a>
+            <a href="#directorio" className="hover:text-purple-400 transition-colors flex items-center gap-2"><${Sparkles} className="w-4 h-4 text-purple-400"/> Directorio IA</a>
+            <a href="#flow" className="hover:text-[#f59e0b] transition-colors flex items-center gap-2"><${Wand2} className="w-4 h-4 text-[#f59e0b]"/> Google Flow</a>
+            <a href="#skills" className="hover:text-emerald-400 transition-colors flex items-center gap-2"><${Gift} className="w-4 h-4 text-emerald-400"/> Skills</a>
+            <a href="#whatsapp" className="hover:text-[#25D366] transition-colors flex items-center gap-2"><${Smartphone} className="w-4 h-4 text-[#25D366]"/> WhatsApp & Analítica</a>
           </nav>
         </div>
       </header>
     `;
 
+    /* =========================================================================
+       PORTADA (HERO): UN SOLO BLOQUE LIMPIO CON FOTO DE HUGO A LA DERECHA
+       ========================================================================= */
     const Hero = () => html`
-      <section className="relative bg-[#0f172a] text-white slide-container overflow-hidden pt-28">
+      <section className="relative bg-[#0f172a] text-white slide-container overflow-hidden pt-28 pb-16">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2032')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#1e3a8a]/60 to-[#0f172a]"></div>
 
-        <div className="container mx-auto px-6 relative z-10 flex flex-col justify-center items-center text-center max-w-[1500px]">
-          <div className="inline-flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 animate-fade-in-up" style=${{ animationDelay: '0.1s' }}>
-            <span className="bg-white text-[#1e3a8a] text-sm sm:text-lg font-black px-6 sm:px-8 py-3 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2.5">
-              <${Award} className="w-5 h-5 text-[#00aeef]"/> Evento: Open Summit
-            </span>
-            <span className="bg-[#f59e0b] text-[#0f172a] text-sm sm:text-lg font-black px-6 sm:px-8 py-3 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2.5">
-              <${Calendar} className="w-5 h-5"/> Jueves 22 de octubre de 2026
-            </span>
-            <span className="bg-slate-900/90 border-2 border-[#00aeef] text-[#00aeef] text-sm sm:text-lg font-black px-6 sm:px-8 py-3 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2.5">
-              <${Clock} className="w-5 h-5"/> Inicio: 3:00 p. m.
-            </span>
-          </div>
-
-          <div className="bg-white/95 p-4 sm:p-5 rounded-3xl shadow-[0_0_40px_rgba(255,255,255,0.25)] mb-6 animate-fade-in-up" style=${{ animationDelay: '0.15s' }}>
-            <img src=${GOV_LOGO} alt="Gobierno Regional Metropolitano de Lima" className="h-16 sm:h-20 w-auto object-contain mx-auto" />
-          </div>
-
-          <p className="text-lg sm:text-2xl font-black uppercase tracking-[0.25em] text-[#f59e0b] mb-4 animate-fade-in-up" style=${{ animationDelay: '0.18s' }}>
-            Gobierno Regional Metropolitano de Lima · Base de Conocimientos Integral
-          </p>
-
-          <h1 className="text-4xl sm:text-6xl md:text-[6.2rem] font-black mb-8 leading-[1.05] tracking-tight animate-fade-in-up" style=${{ animationDelay: '0.2s' }}>
-            INTELIGENCIA ARTIFICIAL + <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00aeef] via-[#38bdf8] to-[#00ffcc]">
-              ECOMMERCE PARA EMPRENDEDORES
-            </span>
-          </h1>
-
-          <p className="text-xl sm:text-2xl md:text-3xl text-slate-200 font-medium mb-10 max-w-5xl animate-fade-in-up leading-relaxed" style=${{ animationDelay: '0.3s' }}>
-            “La inteligencia artificial puede ayudarte a producir y organizar mejor. <strong className="text-[#f59e0b]">Para convertir ese trabajo en ventas necesitas una oferta clara, contenido útil y una buena experiencia de compra.</strong>”
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl w-full mb-12 animate-fade-in-up text-left" style=${{ animationDelay: '0.35s' }}>
-            <div className="bg-slate-900/90 border border-slate-700 p-6 rounded-3xl flex items-start gap-4 shadow-xl">
-              <${Building2} className="w-10 h-10 text-[#f59e0b] shrink-0 mt-1"/>
-              <div>
-                <span className="text-xs font-black uppercase tracking-widest text-[#f59e0b] block">Lugar de la Conferencia</span>
-                <strong className="text-xl text-white block mt-1">Auditorio Casa de la Juventud, Surquillo</strong>
-                <span className="text-slate-300 text-base">Jueves 22 de octubre de 2026 · Hora anunciada: 3:00 p. m.</span>
+        <div className="container mx-auto px-6 relative z-10 max-w-[1650px]">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <!-- Columna Izquierda: Títulos y Badges -->
+            <div className="lg:col-span-8 text-center lg:text-left">
+              <div className="inline-flex flex-wrap justify-center lg:justify-start gap-4 mb-8 animate-fade-in-up" style=${{ animationDelay: '0.1s' }}>
+                <span className="bg-white text-[#1e3a8a] text-base sm:text-lg font-black px-7 py-3 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2.5">
+                  <${Award} className="w-5 h-5 text-[#00aeef]"/> Open Summit 2026
+                </span>
+                <span className="bg-[#f59e0b] text-[#0f172a] text-base sm:text-lg font-black px-7 py-3 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2.5">
+                  <${Calendar} className="w-5 h-5"/> 22 Octubre · 3:00 P. M.
+                </span>
               </div>
-            </div>
-            <div className="bg-slate-900/90 border border-slate-700 p-6 rounded-3xl flex items-start gap-4 shadow-xl">
-              <${Users} className="w-10 h-10 text-[#00aeef] shrink-0 mt-1"/>
-              <div>
-                <span className="text-xs font-black uppercase tracking-widest text-[#00aeef] block">Público Objetivo</span>
-                <strong className="text-xl text-white block mt-1">Pequeños emprendedores de productos y servicios</strong>
-                <span className="text-slate-300 text-base">Incluyendo personas que recién comienzan y buscan ordenar sus ventas digitales.</span>
-              </div>
-            </div>
-          </div>
 
-          <div className="bg-slate-900/90 border-2 border-[#00aeef]/50 p-6 md:p-8 rounded-[4rem] shadow-[0_0_50px_rgba(0,174,239,0.25)] backdrop-blur-md inline-flex flex-col sm:flex-row items-center gap-6 sm:gap-8 animate-fade-in-up" style=${{ animationDelay: '0.4s' }}>
-            <div className="w-28 h-28 shrink-0 rounded-full border-[4px] border-[#00aeef] overflow-hidden shadow-[0_0_30px_rgba(0,174,239,0.4)]">
-              <img src=${HUGO_PHOTO} alt="Hugo López" className="w-full h-full object-cover object-top" />
+              <h1 className="text-5xl sm:text-7xl xl:text-[5.8rem] font-black mb-8 leading-[1.03] tracking-tight animate-fade-in-up" style=${{ animationDelay: '0.2s' }}>
+                INTELIGENCIA <br/>
+                ARTIFICIAL + <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00aeef] to-[#00ffcc]">
+                  ECOMMERCE
+                </span>
+              </h1>
+
+              <p className="text-2xl sm:text-3xl md:text-4xl text-slate-300 font-medium leading-snug max-w-3xl mx-auto lg:mx-0 animate-fade-in-up" style=${{ animationDelay: '0.3s' }}>
+                El sistema práctico para que todo emprendedor atraiga clientes, produzca con IA y venda todos los días.
+              </p>
             </div>
-            <div className="text-center sm:text-left sm:pr-6">
-              <p className="text-sm text-[#f59e0b] font-black uppercase tracking-widest mb-1">Expositor Oficial — Open Summit</p>
-              <p className="text-3xl text-white font-black uppercase tracking-tight">Hugo López</p>
-              <p className="text-lg text-[#00aeef] font-bold mt-1">El Marketero del Pueblo · @hugolopez.pe</p>
-              <p className="text-sm text-slate-300 mt-1">Especialista en Inteligencia Artificial, TikTok, Ecommerce & Automatización Comercial</p>
+
+            <!-- Columna Derecha: Tarjeta Protagonista de Hugo López -->
+            <div className="lg:col-span-4 flex justify-center animate-fade-in-up" style=${{ animationDelay: '0.35s' }}>
+              <div className="bg-slate-900/90 border-2 border-[#00aeef]/60 p-8 sm:p-10 rounded-[3.5rem] shadow-[0_0_60px_rgba(0,174,239,0.28)] backdrop-blur-md text-center w-full max-w-md hover:border-[#00aeef] transition-all">
+                <div className="w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-full border-[5px] border-[#00aeef] overflow-hidden shadow-[0_0_35px_rgba(0,174,239,0.5)] mb-6">
+                  <img src=${HUGO_PHOTO} alt="Hugo López" className="w-full h-full object-cover object-top" />
+                </div>
+                <span className="bg-[#f59e0b] text-[#0f172a] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-3">
+                  Expositor Oficial
+                </span>
+                <h2 className="text-4xl font-black text-white uppercase tracking-tight">Hugo López</h2>
+                <p className="text-xl text-[#00aeef] font-black mt-1">El Marketero del Pueblo</p>
+                <p className="text-base text-slate-300 font-semibold mt-2">TikTok: @hugolopez.pe</p>
+              </div>
             </div>
           </div>
         </div>
@@ -184,486 +164,408 @@
     `;
 
     /* =========================================================================
-       SECCIONES 1, 2 Y 3: PROPÓSITO, APERTURA Y CASOS CONDUCTORES
+       BLOQUE 1: QUIÉN TE CAPACITA HOY — PERFIL PROFESIONAL DE HUGO LÓPEZ
        ========================================================================= */
-    const PropositoYApertura = () => {
-      const recorrido = [
-        "1. Entender al cliente",
-        "2. Preparar una oferta",
-        "3. Crear contenido",
-        "4. Generar confianza",
-        "5. Atender consultas",
-        "6. Confirmar pedidos",
-        "7. Cobrar y entregar",
-        "8. Medir y mejorar"
-      ];
-      const resultados = [
-        "1. Qué producto o servicio quiere impulsar.",
-        "2. Qué preguntas necesita responder su contenido.",
-        "3. Cómo usar IA con información real de su negocio.",
-        "4. Para qué sirven las skills.",
-        "5. Cómo producir imágenes, flyers, carruseles y videos.",
-        "6. Cómo conectar TikTok con consultas y pedidos.",
-        "7. Cómo organizar su atención por WhatsApp.",
-        "8. Qué necesita preparar para un agente de IA.",
-        "9. Cómo gestionar pagos, entregas y seguimiento.",
-        "10. Qué indicadores revisar para tomar decisiones."
-      ];
-
-      return html`
-        <section id="proposito" className="bg-[#0a0a0a] border-t-2 border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <div className="text-center mb-16">
-              <h2 className="text-xl font-black text-[#f59e0b] uppercase tracking-[0.2em] mb-3">1. Propósito de la Conferencia</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-white mb-6">Conectar IA, Contenido, Atención y Ventas</h3>
-              <p className="text-2xl text-slate-300 max-w-5xl mx-auto leading-relaxed">
-                Mostrar cómo un pequeño emprendedor puede conectar inteligencia artificial, contenido, atención y organización comercial para desarrollar sus ventas digitales.
-              </p>
-            </div>
-
-            <div className="bg-slate-900/90 border border-slate-700 rounded-[3rem] p-8 md:p-12 mb-16 shadow-2xl">
-              <h4 className="text-2xl font-black text-[#00aeef] uppercase tracking-wider mb-6 text-center">El Recorrido Completo de la Conferencia (8 Etapas)</h4>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-                ${recorrido.map((step, idx) => html`
-                  <div key=${idx} className="bg-[#16161a] border border-slate-700 hover:border-[#00aeef] p-4 rounded-2xl text-center flex flex-col justify-center items-center transition-all shadow-lg">
-                    <span className="w-8 h-8 rounded-full bg-[#00aeef]/20 text-[#00aeef] font-black text-sm flex items-center justify-center mb-2">${idx + 1}</span>
-                    <span className="text-sm font-bold text-white leading-snug">${step.replace(/^\d+\.\s*/, '')}</span>
-                  </div>
-                `)}
-              </div>
-              <p className="text-center text-slate-300 text-lg mt-8 bg-black/40 p-5 rounded-2xl border border-slate-800">
-                <strong className="text-[#f59e0b]">Responsabilidad del emprendedor:</strong> La IA puede ayudar en distintos momentos del recorrido. El emprendedor sigue siendo responsable de conocer su producto, comprobar la información, atender las excepciones y cumplir lo prometido.
-              </p>
-            </div>
-
-            <div className="bg-slate-900/70 border border-slate-700 rounded-[3.5rem] p-10 md:p-14 shadow-2xl mb-20">
-              <h4 className="text-3xl md:text-4xl font-black text-white text-center mb-4">Resultado Esperado: Los 10 Aprendizajes Clave</h4>
-              <p className="text-xl text-slate-400 text-center mb-10">Cada participante debería salir con claridad sobre:</p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-5">
-                ${resultados.map((item, idx) => html`
-                  <div key=${idx} className="bg-[#16161a] border border-slate-700/80 p-5 rounded-2xl flex items-start gap-3 shadow-lg">
-                    <${CheckCircle} className="w-6 h-6 text-[#f59e0b] shrink-0 mt-0.5"/>
-                    <span className="text-base font-bold text-white leading-snug">${item}</span>
-                  </div>
-                `)}
-              </div>
-            </div>
-
-            <div className="grid lg:grid-cols-12 gap-10 mb-20">
-              <div className="lg:col-span-7 bg-gradient-to-br from-blue-950/50 to-slate-900 border-2 border-[#00aeef]/40 rounded-[3.5rem] p-8 md:p-12 shadow-2xl">
-                <span className="bg-[#00aeef] text-[#0f172a] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-4">2. Apertura: Conectar con la Realidad del Emprendedor</span>
-                <h4 className="text-3xl font-black text-white mb-6">Guion Sugerido de Apertura en Vivo</h4>
-                <div className="space-y-4 text-lg text-slate-200 leading-relaxed bg-black/40 p-6 rounded-3xl border border-slate-800 italic">
-                  <p>“Levanten la mano quienes tienen un negocio y alguna vez han pensado: <strong className="text-[#f59e0b] not-italic">no sé qué publicar.</strong></p>
-                  <p>Ahora, quienes publican, reciben consultas y sienten que <strong className="text-[#00aeef] not-italic">muchas personas preguntan, pero pocas compran.</strong></p>
-                  <p>Y finalmente: ¿a quién le ha pasado que estaba trabajando, preparando un pedido o atendiendo a alguien y <strong className="text-rose-400 not-italic">dejó mensajes sin responder?</strong></p>
-                  <p>Hoy vamos a conectar esas situaciones. Vamos a ver cómo descubrir qué necesita saber nuestro cliente, cómo crear contenido con inteligencia artificial y cómo organizar la atención para que una consulta pueda convertirse en un pedido.</p>
-                  <p>Si vendes ropa, comida, accesorios o productos para el hogar, esta ruta te sirve. Si vendes servicios, también: cambiaremos el pedido por una cita, una reserva o una contratación”.</p>
-                </div>
-                <div className="mt-6 bg-[#f59e0b]/15 border border-[#f59e0b]/40 p-5 rounded-2xl">
-                  <strong className="text-[#f59e0b] uppercase text-xs tracking-widest block mb-1">Pregunta de participación al público:</strong>
-                  <p className="text-xl font-black text-white">“¿Qué vendes y qué te cuesta más hoy: conseguir atención, responder consultas o cerrar ventas?”</p>
-                  <p className="text-sm text-slate-300 mt-1">Pedir dos o tres respuestas breves y reutilizarlas durante la exposición.</p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-5 bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-slate-950 rounded-[3.5rem] p-8 md:p-12 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <span className="bg-slate-950 text-[#f59e0b] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-4">Actividad Inicial en el Celular</span>
-                  <h4 className="text-3xl font-black mb-4">Cada persona escribe 4 líneas:</h4>
-                  <ul className="space-y-3 text-lg font-bold mb-6 bg-white/90 p-6 rounded-3xl">
-                    <li>1. Mi producto o servicio prioritario.</li>
-                    <li>2. Mi cliente principal.</li>
-                    <li>3. La duda que más me preguntan.</li>
-                    <li>4. La acción que quiero conseguir esta semana.</li>
-                  </ul>
-                </div>
-                <div className="bg-slate-950 text-white p-6 rounded-3xl">
-                  <strong className="text-[#f59e0b] text-xs uppercase tracking-widest block mb-2">Ejemplo modelo:</strong>
-                  <p className="text-base text-slate-200 leading-relaxed">
-                    “Vendo blusas. Quiero llegar a personas que buscan ropa para trabajar. Me preguntan cómo elegir la talla. Esta semana quiero recibir consultas con talla y distrito para poder confirmar pedidos.”
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#16161a] border border-slate-700 rounded-[3.5rem] p-10 md:p-14 shadow-2xl">
-              <div className="text-center mb-10">
-                <span className="text-sm font-black uppercase tracking-widest text-[#00aeef] block mb-2">3. Casos que acompañarán la conferencia</span>
-                <h4 className="text-3xl md:text-4xl font-black text-white">Tres Negocios Didácticos Conductores</h4>
-                <p className="text-base text-slate-400 mt-2">Los siguientes negocios, precios y condiciones son ejemplos didácticos.</p>
-              </div>
-              <div className="grid lg:grid-cols-3 gap-8 mb-8">
-                <div className="bg-slate-900 border-2 border-[#00aeef] p-8 rounded-3xl">
-                  <span className="bg-[#00aeef] text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase">Caso Principal · Tienda de Ropa</span>
-                  <h5 className="text-2xl font-black text-white mt-3 mb-2">“Viste Bonito” (Blusas)</h5>
-                  <p className="text-sm text-slate-300 mb-4">Atiende por WhatsApp · Publica en TikTok · Recursos limitados. <strong className="text-rose-400">Dificultad:</strong> preguntan el precio y luego dejan de responder.</p>
-                  <strong className="text-xs uppercase tracking-widest text-[#00aeef] block mb-2">Preguntas de sus clientes:</strong>
-                  <ul className="text-sm text-slate-200 space-y-1.5">
-                    <li>• ¿Qué medidas tiene?</li>
-                    <li>• ¿Cómo sé qué talla elegir?</li>
-                    <li>• ¿La tela se transparenta?</li>
-                    <li>• ¿Qué colores quedan?</li>
-                    <li>• ¿Cuánto cuesta el envío?</li>
-                    <li>• ¿Cómo puedo pagar?</li>
-                  </ul>
-                </div>
-                <div className="bg-slate-900 border border-slate-700 p-8 rounded-3xl">
-                  <span className="bg-[#f59e0b] text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase">Caso Complementario 1 · Repostería</span>
-                  <h5 className="text-2xl font-black text-white mt-3 mb-2">“Dulce Encuentro”</h5>
-                  <p className="text-base text-slate-300 leading-relaxed mb-4">
-                    Prepara tortas por encargo. Necesita conocer <strong className="text-white">fecha, cantidad de personas y diseño</strong>.
-                  </p>
-                  <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-sm text-slate-300">
-                    <strong className="text-[#f59e0b] block mb-1">Dudas frecuentes:</strong>
-                    Sus clientes preguntan por tamaño, precio y disponibilidad.
-                  </div>
-                </div>
-                <div className="bg-slate-900 border border-slate-700 p-8 rounded-3xl">
-                  <span className="bg-emerald-400 text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase">Caso Complementario 2 · Servicios</span>
-                  <h5 className="text-2xl font-black text-white mt-3 mb-2">Limpieza de Muebles</h5>
-                  <p className="text-base text-slate-300 leading-relaxed mb-4">
-                    Atiende por zonas. Necesita conocer <strong className="text-white">tipo de mueble y ubicación</strong>.
-                  </p>
-                  <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-sm text-slate-300">
-                    <strong className="text-emerald-400 block mb-1">Dudas frecuentes:</strong>
-                    Preguntan qué incluye, cuánto demora y cuándo pueden volver a utilizar el mueble.
-                  </div>
-                </div>
-              </div>
-              <div className="bg-blue-950/40 border border-[#00aeef]/40 p-6 rounded-2xl text-center">
-                <strong className="text-[#00aeef] uppercase tracking-widest text-xs block mb-1">Aprendizaje Transversal</strong>
-                <p className="text-xl font-bold text-white">Los rubros cambian, pero se repiten necesidades: Entender la oferta, confiar, resolver dudas, conocer el costo total y saber cómo comprar.</p>
-              </div>
-            </div>
+    const PerfilHugo = () => html`
+      <section id="expositor" className="bg-[#0a0a0a] border-t-2 border-slate-800 slide-container">
+        <div className="container mx-auto px-6 max-w-[1600px]">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl font-black text-[#f59e0b] uppercase tracking-[0.2em] mb-4">Tu Capacitador Hoy</h2>
+            <h3 className="text-5xl md:text-7xl font-black text-white mb-6">Hugo López — <span className="text-[#00aeef]">El Marketero del Pueblo</span></h3>
+            <p className="text-2xl md:text-3xl text-slate-400 max-w-5xl mx-auto leading-relaxed">
+              Formación, estrategia y aplicación práctica para que más emprendedores incorporen la inteligencia artificial al crecimiento real de sus negocios.
+            </p>
           </div>
-        </section>
-      `;
-    };
 
-    /* =========================================================================
-       SECCIONES 4 Y 5: ECOMMERCE PARA QUIEN EMPIEZA Y OFERTA CLARA + FICHA IA
-       ========================================================================= */
-    const EcommerceYOferta = () => {
-      const partesVenta = [
-        { p: "1. Descubrimiento", n: "Encontrar algo que le interese." },
-        { p: "2. Evaluación", n: "Comprender si le sirve." },
-        { p: "3. Confianza", n: "Saber quién vende y qué puede esperar." },
-        { p: "4. Consulta", n: "Resolver una duda concreta." },
-        { p: "5. Compra", n: "Confirmar producto, precio y condiciones." },
-        { p: "6. Pago", n: "Saber cuánto y cómo pagar." },
-        { p: "7. Entrega", n: "Recibir lo acordado." },
-        { p: "8. Posventa", n: "Obtener ayuda y poder volver a comprar." }
-      ];
-
-      const canales = [
-        { c: "TikTok", f: "Descubrimiento, educación, demostración y conversación." },
-        { c: "TikTok LIVE", f: "Interacción en vivo, presentación y resolución de dudas." },
-        { c: "WhatsApp Business", f: "Catálogo, consultas, coordinación y seguimiento." },
-        { c: "Google Business Profile (negocios aptos)", f: "Descubrimiento local y reputación." },
-        { c: "TikTok Shop (cuando corresponda)", f: "Compra integrada dentro de TikTok." },
-        { c: "Web propia (cuando el negocio la necesite)", f: "Mayor control sobre presentación, pedidos e integraciones." }
-      ];
-
-      const fichaTexto = `FICHA BÁSICA DEL NEGOCIO PARA TRABAJAR CON IA:
-1. Nombre del negocio:
-2. Producto o servicio:
-3. Ubicación o cobertura:
-4. Cliente principal:
-5. Necesidad que atiende:
-6. Características confirmadas:
-7. Precio o forma de cotización:
-8. Disponibilidad:
-9. Condiciones de entrega:
-10. Diferencia frente a otras alternativas:
-11. Tono de comunicación:
-12. Canal de contacto:
-13. Datos que todavía deben confirmarse:`;
-
-      return html`
-        <section id="ecommerce" className="bg-[#111827] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <div className="text-center mb-16">
-              <h2 className="text-xl font-black text-[#00aeef] uppercase tracking-[0.2em] mb-3">4. Comercio Electrónico para quien recién empieza</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-white mb-6">De las Redes y WhatsApp a un Sistema de Ventas</h3>
-              <p className="text-xl text-slate-300 max-w-4xl mx-auto">
-                El comercio electrónico comprende la comercialización de productos o servicios mediante canales digitales. Un pequeño negocio puede comenzar recibiendo consultas y coordinando pedidos por redes sociales y WhatsApp. A medida que crece, puede incorporar una web, una plataforma de pedidos o integraciones.
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-12 gap-10 mb-20">
-              <div className="lg:col-span-7 bg-slate-900 border border-slate-700 rounded-[3rem] p-8 md:p-10 shadow-2xl">
-                <h4 className="text-2xl font-black text-white mb-6">Las 8 Partes de una Venta Digital</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="border-b border-slate-700 text-[#00aeef] text-xs uppercase tracking-widest">
-                        <th className="py-3 px-4">Parte</th>
-                        <th className="py-3 px-4">Qué necesita el cliente</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800 text-base">
-                      ${partesVenta.map((row, idx) => html`
-                        <tr key=${idx} className="hover:bg-slate-800/40">
-                          <td className="py-3 px-4 font-black text-white">${row.p}</td>
-                          <td className="py-3 px-4 text-slate-300">${row.n}</td>
-                        </tr>
-                      `)}
-                    </tbody>
-                  </table>
+          <div className="grid lg:grid-cols-12 gap-12 items-center mb-16">
+            <div className="lg:col-span-4 flex flex-col items-center">
+              <div className="relative">
+                <div className="w-64 h-64 sm:w-72 sm:h-72 rounded-[3.5rem] border-4 border-[#00aeef] overflow-hidden shadow-[0_0_50px_rgba(0,174,239,0.35)]">
+                  <img src=${HUGO_PHOTO} alt="Hugo López" className="w-full h-full object-cover object-top" />
                 </div>
-              </div>
-
-              <div className="lg:col-span-5 bg-slate-900 border border-slate-700 rounded-[3rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl font-black text-[#f59e0b] mb-6">Función de Cada Canal</h4>
-                  <div className="space-y-3">
-                    ${canales.map((item, idx) => html`
-                      <div key=${idx} className="bg-[#16161a] p-4 rounded-2xl border border-slate-800">
-                        <strong className="text-white block text-base">${item.c}</strong>
-                        <span className="text-slate-300 text-sm">${item.f}</span>
-                      </div>
-                    `)}
-                  </div>
-                </div>
-                <div className="mt-6 bg-blue-950/50 border border-[#00aeef]/40 p-5 rounded-2xl">
-                  <strong className="text-[#00aeef] text-xs uppercase tracking-widest block mb-1">Frase para explicar:</strong>
-                  <p className="text-base font-bold text-white">“Puedes comenzar con herramientas que ya tienes a tu alcance. Lo importante es que el cliente encuentre una ruta clara desde que te descubre hasta que recibe su compra.”</p>
+                <div className="bg-[#f59e0b] text-[#0f172a] font-black text-lg px-6 py-3 rounded-2xl shadow-2xl -mt-6 relative z-10 text-center">
+                  @hugolopez.pe
                 </div>
               </div>
             </div>
 
-            <div className="bg-slate-900 border-2 border-[#f59e0b]/40 rounded-[3.5rem] p-8 md:p-14 shadow-2xl">
-              <div className="text-center mb-10">
-                <span className="text-sm font-black uppercase tracking-widest text-[#f59e0b] block mb-2">5. Preparar una Oferta que se Entienda</span>
-                <h4 className="text-3xl md:text-5xl font-black text-white">7 Preguntas Antes de Crear un Flyer o Video</h4>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-3 mb-10">
-                ${[
-                  "1. ¿Qué vendo?",
-                  "2. ¿Para quién?",
-                  "3. ¿Qué necesidad atiendo?",
-                  "4. ¿Qué incluye?",
-                  "5. ¿Cuánto cuesta?",
-                  "6. ¿Qué condiciones tiene?",
-                  "7. ¿Cómo se compra?"
-                ].map((q, i) => html`
-                  <span key=${i} className="bg-[#16161a] border border-[#f59e0b]/50 text-white px-5 py-2.5 rounded-full font-bold text-base">${q}</span>
-                `)}
-              </div>
-
-              <div className="grid lg:grid-cols-3 gap-6 mb-12">
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <span className="text-xs font-black uppercase text-[#00aeef] tracking-widest">Ejemplo de Ropa</span>
-                  <div className="mt-3 p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-sm text-rose-200 mb-3">
-                    <strong className="block text-rose-400">Mensaje poco claro:</strong> “Tenemos novedades. Consulta al interno.”
-                  </div>
-                  <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-sm text-emerald-100">
-                    <strong className="block text-emerald-400">Mensaje más útil:</strong> “Blusas para combinar con tus prendas de oficina. Revisa las medidas de cada modelo y consulta colores disponibles por WhatsApp.”
-                  </div>
-                </div>
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800 flex flex-col justify-between">
-                  <div>
-                    <span className="text-xs font-black uppercase text-[#f59e0b] tracking-widest">Ejemplo de Repostería</span>
-                    <p className="text-base text-white font-medium mt-3 leading-relaxed">
-                      “Tortas por encargo para celebraciones familiares. Cuéntanos la fecha, el número de invitados y el estilo que buscas para revisar disponibilidad y cotizar.”
-                    </p>
-                  </div>
-                  <span className="text-xs text-slate-400 mt-4 block">Pide los 3 datos críticos desde el primer contacto.</span>
-                </div>
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800 flex flex-col justify-between">
-                  <div>
-                    <span className="text-xs font-black uppercase text-emerald-400 tracking-widest">Ejemplo de Servicios</span>
-                    <p className="text-base text-white font-medium mt-3 leading-relaxed">
-                      “Limpieza de muebles a domicilio. Envíanos una foto del mueble y tu distrito para indicarte el alcance del servicio, precio y disponibilidad.”
-                    </p>
-                  </div>
-                  <span className="text-xs text-slate-400 mt-4 block">La diferencia comercial: el cliente recibe una instrucción concreta y el emprendedor obtiene información que le ayuda a atender.</span>
-                </div>
-              </div>
-
-              <div className="prompt-box relative">
-                <${CopyButton} text=${fichaTexto} />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#f59e0b] block mb-2">Plantilla Copiable — Ficha Básica del Negocio para trabajar con IA (13 Campos)</span>
-                <pre className="text-sm sm:text-base text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed">${fichaTexto}</pre>
-                <p className="text-xs text-slate-400 mt-3 font-sans">Esta ficha alimentará la estrategia, los prompts y el agente de atención.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 6 Y 7: DESCUBRIR QUÉ BUSCA EL CLIENTE Y DIVERSIFICAR CONTENIDO
-       ========================================================================= */
-    const InvestigacionYPilares = () => {
-      const temasCSI = [
-        { n: "Ropa", t: "Cómo elegir talla o combinar una prenda." },
-        { n: "Repostería", t: "Cómo calcular porciones o elegir una torta." },
-        { n: "Accesorios", t: "Cómo combinar, cuidar o conservar el producto." },
-        { n: "Limpieza", t: "Preparación del espacio y cuidados posteriores." },
-        { n: "Comida", t: "Presentaciones, ocasiones de consumo y conservación." }
-      ];
-
-      const pilares = [
-        { p: "1. Educación", c: "Ayuda a elegir.", e: "Cómo comparar medidas." },
-        { p: "2. Proceso y confianza", c: "Muestra cómo trabaja el negocio.", e: "Revisión y preparación de pedidos." },
-        { p: "3. Objeciones", c: "Responde dudas que frenan la compra.", e: "Cómo luce la tela con distinta iluminación." },
-        { p: "4. Experiencias reales", c: "Aporta evidencia.", e: "Opinión autorizada de una clienta." },
-        { p: "5. Oferta", c: "Facilita la acción comercial.", e: "Modelo, precio y forma de consultar." }
-      ];
-
-      return html`
-        <section id="investigacion" className="bg-[#0a0a0a] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <div className="text-center mb-16">
-              <h2 className="text-xl font-black text-[#00aeef] uppercase tracking-[0.2em] mb-3">6. Descubrir qué busca el cliente</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-white mb-4">Responder Preguntas Reales, No Inventadas</h3>
-              <p className="text-xl text-slate-300 max-w-4xl mx-auto">
-                Principio: una fuente de contenido son las preguntas que el comprador necesita resolver para decidir. Se investigan en Creator Search Insights, Google Search Console, comentarios, WhatsApp, conversaciones en el local y transmisiones en vivo. <strong className="text-rose-400">No presentar ejemplos inventados como búsquedas efectivamente encontradas.</strong>
-              </p>
-            </div>
-
-            <div className="grid lg:grid-cols-12 gap-10 mb-20">
-              <div className="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-[3rem] p-8 md:p-10 shadow-2xl">
-                <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
-                  <h4 className="text-2xl font-black text-[#f59e0b]">6.1. Creator Search Insights (TikTok)</h4>
-                  <a href="https://newsroom.tiktok.com/estadisticas-de-busqueda-de-creadores-tiktok-herramienta?lang=es-419" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#00aeef] underline flex items-center gap-1">Fuente oficial TikTok <${ArrowUpRight} className="w-3.5 h-3.5"/></a>
-                </div>
-                <p className="text-base text-slate-300 mb-4">
-                  Ayuda a explorar temas que las personas buscan en TikTok y oportunidades donde existe demanda de contenido. Se accede buscando “Creator Search Insights” dentro de la app.
+            <div className="lg:col-span-8 space-y-6">
+              <div className="bg-[#16161a] border border-slate-700 rounded-[2.5rem] p-8 shadow-xl">
+                <h4 className="text-2xl font-black text-[#00aeef] mb-3">Formación Académica & Speaker Internacional</h4>
+                <p className="text-xl text-slate-200 leading-relaxed">
+                  <strong className="text-white">Licenciado en Administración por la Universidad Nacional Mayor de San Marcos (UNMSM)</strong>, con estudios de <strong className="text-white">Maestría en Comunicación y Marketing Digital en la UPC</strong>. Speaker nacional e internacional, con reciente participación como expositor y mentor en el <strong className="text-[#f59e0b]">Perú Business Fest</strong>.
                 </p>
-                <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 mb-5 text-sm text-slate-200">
-                  <strong className="text-white block mb-1">Demostración paso a paso:</strong>
-                  1. Abrir TikTok → 2. Buscar Creator Search Insights → 3. Explorar un tema relacionado con el negocio → 4. Revisar búsquedas relacionadas y oportunidades → 5. Elegir una pregunta pertinente → 6. Convertirla en una idea de contenido.
-                </div>
-                <div className="overflow-x-auto mb-5">
-                  <table className="w-full text-left border-collapse text-sm">
-                    <thead>
-                      <tr className="border-b border-slate-700 text-[#f59e0b] uppercase text-xs">
-                        <th className="py-2 px-3">Negocio</th>
-                        <th className="py-2 px-3">Tema que conviene explorar</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800">
-                      ${temasCSI.map((r, i) => html`
-                        <tr key=${i}>
-                          <td className="py-2 px-3 font-bold text-white">${r.n}</td>
-                          <td className="py-2 px-3 text-slate-300">${r.t}</td>
-                        </tr>
-                      `)}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="bg-amber-950/30 border border-amber-500/30 p-4 rounded-2xl text-xs text-amber-100">
-                  <strong className="text-[#f59e0b] block mb-1">Criterio de selección:</strong>
-                  Interesa cuando se relaciona con el negocio, el emprendedor puede responderla correctamente, atrae a personas que podrían necesitar su oferta y permite mostrar conocimiento, producto o proceso. Un tema popular sin relación con el comprador puede traer atención poco útil.
-                </div>
               </div>
 
-              <div className="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-[3rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
-                    <h4 className="text-2xl font-black text-[#00aeef]">6.2. Google Search Console</h4>
-                    <a href="https://developers.google.com/search/docs/monitor-debug/analyze-social-video-content" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#00aeef] underline flex items-center gap-1">Fuente Google Search Central <${ArrowUpRight} className="w-3.5 h-3.5"/></a>
-                  </div>
-                  <p className="text-base text-slate-300 mb-4">
-                    Permite conocer cómo aparece el contenido en Google y qué consultas llevan a él. Google documenta propiedades de plataformas sociales que permiten analizar contenido de TikTok, Instagram, YouTube y X, previa incorporación y verificación.
-                  </p>
-                  <div className="bg-blue-950/40 border border-[#00aeef]/40 p-5 rounded-2xl mb-5 text-sm">
-                    <strong className="text-[#00aeef] uppercase tracking-wider block mb-2">Diferencia que debe quedar clara:</strong>
-                    <p className="text-white mb-1">• <strong>Creator Search Insights:</strong> ayuda a investigar búsquedas dentro de TikTok.</p>
-                    <p className="text-white mb-1">• <strong>Search Console:</strong> muestra consultas y rendimiento de tu contenido en Google (no representa todas las búsquedas del mercado).</p>
-                  </div>
-                  <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-sm text-slate-300 mb-5">
-                    <strong className="text-white block mb-1">Demostración:</strong>
-                    Elegir la cuenta previamente configurada → Revisar consultas → Identificar contenido que recibe clics → Mostrar una oportunidad para ampliar o mejorar una respuesta. (Si recién comienza, iniciar con preguntas de clientes y CSI).
-                  </div>
+              <div className="bg-[#16161a] border border-slate-700 rounded-[2.5rem] p-8 shadow-xl">
+                <h4 className="text-2xl font-black text-[#f59e0b] mb-3">Agencia, Comunidad & Sector Público</h4>
+                <p className="text-xl text-slate-200 leading-relaxed">
+                  Dirige una <strong className="text-white">agencia de transformación digital que atiende a 15 clientes</strong>, liderando un equipo de <strong className="text-white">siete profesionales</strong>. Impulsa el <strong className="text-emerald-400">Centro de Ayuda para Emprendedores</strong> (espacio gratuito de orientación en marketing y herramientas digitales) y trabaja con la <strong className="text-white">Municipalidad de Lima</strong> y el <strong className="text-white">Ministerio de la Producción (PRODUCE)</strong> como Capacitador de Transformación Digital.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-slate-900 border-2 border-[#00aeef]/40 rounded-[2.5rem] p-8 text-center shadow-2xl">
+              <span className="text-5xl md:text-6xl font-black text-[#00aeef] block mb-2">+30K</span>
+              <p className="text-xl font-bold text-white">Seguidores en TikTok</p>
+              <p className="text-sm text-slate-400 mt-1">Educación práctica diaria</p>
+            </div>
+            <div className="bg-slate-900 border-2 border-[#f59e0b]/40 rounded-[2.5rem] p-8 text-center shadow-2xl">
+              <span className="text-5xl md:text-6xl font-black text-[#f59e0b] block mb-2">+1,600</span>
+              <p className="text-xl font-bold text-white">Emprendedores</p>
+              <p className="text-sm text-slate-400 mt-1">En su comunidad de IA y digital</p>
+            </div>
+            <div className="bg-slate-900 border-2 border-purple-500/40 rounded-[2.5rem] p-8 text-center shadow-2xl">
+              <span className="text-5xl md:text-6xl font-black text-purple-400 block mb-2">15 Marcas</span>
+              <p className="text-xl font-bold text-white">En su Agencia Digital</p>
+              <p className="text-sm text-slate-400 mt-1">Liderando 7 especialistas</p>
+            </div>
+            <div className="bg-slate-900 border-2 border-emerald-500/40 rounded-[2.5rem] p-8 text-center shadow-2xl">
+              <span className="text-4xl md:text-5xl font-black text-emerald-400 block mb-2">PRODUCE & MML</span>
+              <p className="text-xl font-bold text-white">Capacitador Oficial</p>
+              <p className="text-sm text-slate-400 mt-1">Transformación Digital</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+
+    /* =========================================================================
+       BLOQUE 2: ECOMMERCE SIN PÁGINA WEB — TU ECOSISTEMA DE VENTAS
+       ========================================================================= */
+    const EcommerceSinWeb = () => html`
+      <section id="ecommerce" className="bg-[#111827] border-t border-slate-800 slide-container">
+        <div className="container mx-auto px-6 max-w-[1600px]">
+          <div className="text-center mb-20">
+            <h2 className="text-2xl font-black text-[#00aeef] uppercase tracking-[0.2em] mb-4">Comercio Electrónico Real</h2>
+            <h3 className="text-5xl md:text-7xl font-black text-white mb-6">Vender por Internet Sin Tener Página Web</h3>
+            <p className="text-2xl md:text-3xl text-slate-400 max-w-5xl mx-auto leading-relaxed">
+              Si recién comienzas, <strong className="text-white">tu tienda es TikTok, tu mostrador en vivo es TikTok LIVE y tu caja registradora es WhatsApp Business.</strong>
+            </p>
+          </div>
+
+          <!-- Las 4 Vitrinas del Emprendedor -->
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+            <div className="bg-[#16161a] border-t-[6px] border-[#00aeef] rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <${Video} className="w-14 h-14 text-[#00aeef] mb-6"/>
+                <h4 className="text-3xl font-black text-white mb-4">1. TikTok como Tienda</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Donde el cliente te descubre, evalúa tu producto y resuelve sus dudas antes de escribirte.
+                </p>
+              </div>
+              <span className="text-sm font-black uppercase text-[#00aeef] mt-8 block">Atracción & Confianza</span>
+            </div>
+
+            <div className="bg-[#16161a] border-t-[6px] border-rose-500 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <${ShieldCheck} className="w-14 h-14 text-rose-400 mb-6"/>
+                <h4 className="text-3xl font-black text-white mb-4">2. Verificación RUC 10 / 20</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Registra tu empresa en TikTok Business con tu ficha RUC 10 o RUC 20 para habilitar enlaces, funciones comerciales y prepararte para <strong className="text-white">TikTok Shop</strong>.
+                </p>
+              </div>
+              <span className="text-sm font-black uppercase text-rose-400 mt-8 block">Respaldo Empresarial</span>
+            </div>
+
+            <div className="bg-[#16161a] border-t-[6px] border-[#25D366] rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <${Smartphone} className="w-14 h-14 text-[#25D366] mb-6"/>
+                <h4 className="text-3xl font-black text-white mb-4">3. Catálogo de WhatsApp</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Tu tienda gratuita dentro del chat: fotos reales, precios claros, códigos y <strong className="text-white">carrito de compras</strong> para recibir pedidos listos.
+                </p>
+              </div>
+              <span className="text-sm font-black uppercase text-[#25D366] mt-8 block">Carrito & Cierre</span>
+            </div>
+
+            <div className="bg-[#16161a] border-t-[6px] border-[#f59e0b] rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <${Star} className="w-14 h-14 text-[#f59e0b] mb-6"/>
+                <h4 className="text-3xl font-black text-white mb-4">4. Google My Business</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Tu catálogo local en Google y Maps. Construye tu <strong className="text-white">reputación digital</strong> con calificaciones, estrellas y comentarios de clientes reales.
+                </p>
+              </div>
+              <span className="text-sm font-black uppercase text-[#f59e0b] mt-8 block">Reputación & Búsqueda Local</span>
+            </div>
+          </div>
+
+          <!-- Diversificación de Contenido: En Ecommerce no todo es venta -->
+          <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-12 md:p-16 shadow-2xl">
+            <div className="text-center mb-12">
+              <span className="bg-[#f59e0b] text-[#0f172a] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-4">Regla de Oro del Ecommerce</span>
+              <h4 className="text-4xl md:text-5xl font-black text-white">Para Vender, No Todo tu Contenido Debe Ser Venta</h4>
+              <p className="text-2xl text-slate-400 mt-3">Rota estos 5 pilares para atraer compradores listos y no solo curiosos:</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              ${[
+                { n: "1. Educación", d: "Enseña a elegir: tallas, medidas, porciones o cómo usar tu producto.", c: "text-[#00aeef]" },
+                { n: "2. Proceso Real", d: "Muestra cómo preparas pedidos, tu taller o qué revisas antes de entregar.", c: "text-[#f59e0b]" },
+                { n: "3. Objeciones", d: "Responde en video las dudas que frenan la compra (envíos, garantía, telas).", c: "text-rose-400" },
+                { n: "4. Prueba Social", d: "Casos reales, entregas del día y testimonios autorizados de clientes.", c: "text-purple-400" },
+                { n: "5. Oferta Directa", d: "Presenta el producto, su precio y el paso exacto para pedir por WhatsApp.", c: "text-emerald-400" }
+              ].map((p, i) => html`
+                <div key=${i} className="bg-[#16161a] border border-slate-700 rounded-[2rem] p-8 text-center">
+                  <h5 className=${`text-2xl font-black mb-4 ${p.c}`}>${p.n}</h5>
+                  <p className="text-lg text-slate-300 leading-relaxed">${p.d}</p>
                 </div>
-                <div className="bg-gradient-to-r from-[#f59e0b] to-[#d97706] text-slate-950 p-6 rounded-3xl font-bold">
-                  <span className="text-xs font-black uppercase tracking-widest block mb-1">Actividad Práctica de Investigación</span>
-                  <p className="text-lg font-black">Escribir tres preguntas reales de tu negocio: 1) Una sobre elección · 2) Una sobre una objeción · 3) Una sobre compra o entrega.</p>
-                </div>
+              `)}
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+
+    /* =========================================================================
+       BLOQUE 3: TIKTOK LIVE COMERCIAL & DESCUBRIMIENTO DE BÚSQUEDAS
+       (Estilo limpio de 3 tarjetas grandes como en la referencia)
+       ========================================================================= */
+    const TikTokLiveYBusquedas = () => html`
+      <section className="bg-[#0a0a0a] border-t border-slate-800 slide-container">
+        <div className="container mx-auto px-6 max-w-[1600px]">
+          <!-- Parte A: El TikTok LIVE Comercial -->
+          <div className="text-center mb-16">
+            <h3 className="text-5xl md:text-7xl font-black text-white mb-6">El TikTok LIVE Comercial</h3>
+            <p className="text-2xl md:text-3xl text-slate-400 max-w-4xl mx-auto leading-relaxed">
+              No es solo para conversar sin rumbo. Es tu tienda en vivo para mostrar el producto real, resolver dudas al instante y cerrar por WhatsApp.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-10 mb-24">
+            <div className="bg-[#16161a] border border-slate-800 rounded-[2.5rem] p-10 shadow-2xl">
+              <h4 className="text-3xl font-black text-[#00aeef] mb-6">Formatos que Venden</h4>
+              <ul className="space-y-4 text-xl text-slate-300">
+                <li>• <strong className="text-white">Demostración de catálogo:</strong> probar tallas, texturas o acabados en vivo.</li>
+                <li>• <strong className="text-white">Preguntas y Respuestas (Q&A):</strong> resolver dudas de precios y envíos.</li>
+                <li>• <strong className="text-white">Detrás de cámaras:</strong> preparando o empacando pedidos reales.</li>
+                <li>• <strong className="text-white">Lanzamiento de lote:</strong> unidades o cupos disponibles de la semana.</li>
+              </ul>
+            </div>
+
+            <div className="bg-[#16161a] border border-slate-800 rounded-[2.5rem] p-10 shadow-2xl">
+              <h4 className="text-3xl font-black text-rose-400 mb-6">Equipo Mínimo</h4>
+              <ul className="space-y-4 text-xl text-slate-300">
+                <li>• <strong className="text-white">Celular estable</strong> con buena carga y conexión.</li>
+                <li>• <strong className="text-white">Micrófono</strong> solapero inalámbrico (el audio claro retiene).</li>
+                <li>• <strong className="text-white">Iluminación</strong> frontal hacia ti y hacia el producto.</li>
+                <li>• <strong className="text-white">Precios y medidas</strong> a la mano para responder con seguridad.</li>
+              </ul>
+            </div>
+
+            <div className="bg-[#16161a] border border-slate-800 rounded-[2.5rem] p-10 shadow-2xl">
+              <h4 className="text-3xl font-black text-[#f59e0b] mb-6">Acercar a la Venta</h4>
+              <ul className="space-y-4 text-xl text-slate-300">
+                <li>• <strong className="text-white">Repetir la ruta de compra</strong> cada 5 minutos para los nuevos.</li>
+                <li>• <strong className="text-white">Fijar comentario</strong> indicando cómo pedir por el enlace del perfil.</li>
+                <li>• <strong className="text-white">Pedir 3 datos en WhatsApp:</strong> modelo, talla/medida y distrito.</li>
+                <li>• <strong className="text-white">Constancia:</strong> transmitir te entrena en lo que tu cliente realmente pide.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Parte B: Creator Search Insights + Google Search Console -->
+          <div className="text-center mb-14">
+            <h3 className="text-4xl md:text-6xl font-black text-white mb-4">Descubre Qué Busca Tu Cliente Hoy</h3>
+            <p className="text-2xl text-slate-400 max-w-4xl mx-auto">
+              Dos herramientas gratuitas con IA para dejar de adivinar qué grabar:
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-10">
+            <div className="bg-slate-900 border-2 border-[#f59e0b]/40 rounded-[3rem] p-10 md:p-12 shadow-2xl">
+              <span className="bg-[#f59e0b] text-[#0f172a] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-6">Dentro de TikTok</span>
+              <h4 className="text-4xl font-black text-white mb-4">Creator Search Insights</h4>
+              <p className="text-xl text-slate-300 leading-relaxed mb-6">
+                Búscalo en la lupa de TikTok. Su IA te muestra <strong className="text-white">qué están buscando las personas en tiempo real</strong> y qué temas tienen alta demanda y pocos videos creados.
+              </p>
+              <div className="bg-black/40 p-6 rounded-2xl border border-slate-700 text-lg text-slate-200">
+                <strong className="text-[#f59e0b] block mb-2">Cómo aplicarlo en 1 minuto:</strong>
+                Escribe tu rubro (ej. <em>blusas, tortas, muebles, calzado</em>) → filtra las preguntas frecuentes → graba un video respondiendo exactamente esa búsqueda.
               </div>
             </div>
 
-            <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-14 shadow-2xl">
-              <div className="text-center mb-10">
-                <span className="text-sm font-black uppercase tracking-widest text-[#f59e0b] block mb-2">7. Diversificar el Contenido</span>
-                <h4 className="text-3xl md:text-5xl font-black text-white">Los 5 Pilares + Banco de Ideas por Rubro</h4>
-                <p className="text-lg text-slate-300 mt-2">El cliente necesita razones para prestar atención, comprender y confiar antes de decidir.</p>
+            <div className="bg-slate-900 border-2 border-[#00aeef]/40 rounded-[3rem] p-10 md:p-12 shadow-2xl">
+              <span className="bg-[#00aeef] text-[#0f172a] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-6">Google + TikTok</span>
+              <h4 className="text-4xl font-black text-white mb-4">Google Search Console</h4>
+              <p className="text-xl text-slate-300 leading-relaxed mb-6">
+                Hoy puedes vincular tu cuenta de TikTok con Google Search Console para descubrir <strong className="text-white">qué palabras escribe la gente en Google</strong> cuando les aparecen tus videos de TikTok.
+              </p>
+              <div className="bg-black/40 p-6 rounded-2xl border border-slate-700 text-lg text-slate-200">
+                <strong className="text-[#00aeef] block mb-2">Por qué cambia el juego:</strong>
+                Tus videos posicionan tanto en TikTok como en el buscador de Google, atrayendo personas con intención real de compra.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+
+    /* =========================================================================
+       BLOQUE 4: DIRECTORIO DE INTELIGENCIA ARTIFICIAL PARA EMPRENDEDORES
+       ========================================================================= */
+    const DirectorioIA = () => html`
+      <section id="directorio" className="bg-[#111827] border-t border-slate-800 slide-container">
+        <div className="container mx-auto px-6 max-w-[1600px]">
+          <div className="text-center mb-20">
+            <h2 className="text-2xl font-black text-purple-400 uppercase tracking-[0.2em] mb-4">Tu Kit Tecnológico</h2>
+            <h3 className="text-5xl md:text-7xl font-black text-white mb-6">Directorio de IA para Emprendedores</h3>
+            <p className="text-2xl md:text-3xl text-slate-400 max-w-5xl mx-auto leading-relaxed">
+              Las herramientas exactas para producir imágenes, videos, atender clientes y analizar métricas sin pagar agencias costosas.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-[#16161a] border-2 border-[#00aeef]/50 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <span className="bg-[#00aeef]/20 text-[#00aeef] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Imágenes Ilimitadas</span>
+                <h4 className="text-3xl font-black text-white mt-4 mb-4">Nano Banana 2.1 (Google Flow)</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Genera <strong className="text-white">fotos de catálogo, flyers promocionales y carruseles educativos</strong> manteniendo intacto tu producto real.
+                </p>
+              </div>
+              <div className="mt-8 pt-4 border-t border-slate-800 text-sm font-bold text-[#00aeef]">
+                Acceso gratuito desde Google Flow
+              </div>
+            </div>
+
+            <div className="bg-[#16161a] border-2 border-purple-500/50 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <span className="bg-purple-500/20 text-purple-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">120 Videos Gratis / Mes</span>
+                <h4 className="text-3xl font-black text-white mt-4 mb-4">Omni Flash 1.1 (Google Flow)</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Videos de hasta <strong className="text-white">10 segundos</strong> con tu propio avatar (rostro y voz), edición de fondos y <em>motion control</em> para redes y anuncios.
+                </p>
+              </div>
+              <div className="mt-8 pt-4 border-t border-slate-800 text-sm font-bold text-purple-400">
+                4 videos diarios gratis por cuenta (x2 o x3 con más cuentas)
+              </div>
+            </div>
+
+            <div className="bg-[#16161a] border-2 border-[#f59e0b]/50 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <span className="bg-[#f59e0b]/20 text-[#f59e0b] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Cerebro Estratégico</span>
+                <h4 className="text-3xl font-black text-white mt-4 mb-4">ChatGPT, Claude & Gemini + Skills</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Los 3 asistentes hoy permiten cargar <strong className="text-white">Skills personalizadas</strong> para armar tu estrategia digital, calendario de contenidos y campañas.
+                </p>
+              </div>
+              <div className="mt-8 pt-4 border-t border-slate-800 text-sm font-bold text-[#f59e0b]">
+                Compatible en las 3 plataformas
+              </div>
+            </div>
+
+            <div className="bg-[#16161a] border-2 border-[#25D366]/50 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <span className="bg-[#25D366]/20 text-[#25D366] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Atención en WhatsApp</span>
+                <h4 className="text-3xl font-black text-white mt-4 mb-4">Meta Business Agent</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  El <strong className="text-white">agente de IA oficial de Meta</strong> dentro de WhatsApp Business (gratis, con cuota de mensajes) que responde dudas y filtra pedidos con tu catálogo.
+                </p>
+              </div>
+              <div className="mt-8 pt-4 border-t border-slate-800 text-sm font-bold text-[#25D366]">
+                Integrado en WhatsApp Business
+              </div>
+            </div>
+
+            <div className="bg-[#16161a] border-2 border-emerald-500/50 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <span className="bg-emerald-500/20 text-emerald-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Analítica en Tiempo Real</span>
+                <h4 className="text-3xl font-black text-white mt-4 mb-4">Windsor.ai + IA</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  Conecta tu cuenta de TikTok directamente con <strong className="text-white">Claude, ChatGPT o Gemini</strong> para analizar tus métricas reales conversando desde el chat.
+                </p>
+              </div>
+              <div className="mt-8 pt-4 border-t border-slate-800 text-sm font-bold text-emerald-400">
+                Decisiones con datos en segundos
+              </div>
+            </div>
+
+            <div className="bg-[#16161a] border-2 border-rose-500/50 rounded-[3rem] p-10 shadow-2xl flex flex-col justify-between">
+              <div>
+                <span className="bg-rose-500/20 text-rose-300 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">Demanda & SEO</span>
+                <h4 className="text-3xl font-black text-white mt-4 mb-4">Creator Search Insights & Search Console</h4>
+                <p className="text-xl text-slate-300 leading-relaxed">
+                  IA nativa de TikTok y Google para descubrir <strong className="text-white">qué pregunta exactamente tu comprador</strong> antes de grabar tu próximo video.
+                </p>
+              </div>
+              <div className="mt-8 pt-4 border-t border-slate-800 text-sm font-bold text-rose-400">
+                100% Gratuito
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+
+    /* =========================================================================
+       BLOQUE 5: GOOGLE FLOW — NANO BANANA 2.1 + OMNI FLASH 1.1
+       ========================================================================= */
+    const GoogleFlowSection = () => {
+      const promptImagen = `Utiliza la fotografía adjunta como referencia principal de mi producto. Conserva exactamente su diseño, color, textura y proporciones reales. Crea una fotografía comercial de catálogo sobre una superficie limpia tono marfil #F5F0E8 con iluminación suave de estudio. Si deseas versión Flyer 4:5, agrega el titular arriba con alto contraste y el llamado a la acción "Escríbenos por WhatsApp" sin alterar el producto.`;
+
+      const promptVideo = `Genera un video vertical 9:16 de 10 segundos. Usa mi avatar seleccionado en Flow conservando mi rostro y mi voz en español latino. Muéstrame en una tienda moderna junto a mi producto de la foto adjunta (sin deformarlo). Con ritmo conversacional digo: "¿Tienes dudas antes de elegir? Revisa los detalles en nuestro catálogo y escríbenos por WhatsApp para ayudarte hoy mismo".`;
+
+      return html`
+        <section id="flow" className="bg-[#0a0a0a] border-t border-slate-800 slide-container">
+          <div className="container mx-auto px-6 max-w-[1600px]">
+            <div className="text-center mb-20">
+              <h2 className="text-2xl font-black text-[#f59e0b] uppercase tracking-[0.2em] mb-4">Producción Visual sin Límites</h2>
+              <h3 className="text-5xl md:text-7xl font-black text-white mb-6">Google Flow: Imágenes & Videos con IA</h3>
+              <p className="text-2xl md:text-3xl text-slate-400 max-w-5xl mx-auto leading-relaxed">
+                Todo tu estudio creativo gratuito para redes sociales <strong className="text-white">y también para tus campañas de publicidad digital.</strong>
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 mb-16">
+              <!-- Tarjeta 1: Nano Banana 2.1 -->
+              <div className="bg-slate-900 border-2 border-[#00aeef]/50 rounded-[3.5rem] p-10 md:p-14 shadow-2xl flex flex-col justify-between">
+                <div>
+                  <span className="bg-[#00aeef] text-[#0f172a] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-6">
+                    Imágenes Ilimitadas
+                  </span>
+                  <h4 className="text-4xl md:text-5xl font-black text-white mb-6">Nano Banana 2.1</h4>
+                  <p className="text-2xl text-slate-300 leading-relaxed mb-8">
+                    Sube la foto real de tu producto tomada con el celular y genera <strong className="text-white">3 formatos comerciales</strong> sin perder fidelidad:
+                  </p>
+                  <ul className="space-y-4 text-xl text-slate-200 mb-8">
+                    <li className="flex items-center gap-3"><${CheckCircle} className="w-7 h-7 text-[#00aeef] shrink-0"/> <span><strong>1. Fotos de Catálogo:</strong> Fondo limpio e iluminación de estudio.</span></li>
+                    <li className="flex items-center gap-3"><${CheckCircle} className="w-7 h-7 text-[#00aeef] shrink-0"/> <span><strong>2. Flyers de Oferta (4:5):</strong> Producto protagonista + titular claro.</span></li>
+                    <li className="flex items-center gap-3"><${CheckCircle} className="w-7 h-7 text-[#00aeef] shrink-0"/> <span><strong>3. Carruseles Educativos:</strong> Tarjetas paso a paso que ayudan a comprar.</span></li>
+                  </ul>
+                </div>
+
+                <div className="prompt-box relative">
+                  <${CopyButton} text=${promptImagen} />
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#00aeef] block mb-2">Prompt Maestro: Catálogo & Flyer</span>
+                  <p className="text-base text-emerald-100 leading-relaxed pr-28">${promptImagen}</p>
+                </div>
               </div>
 
-              <div className="grid md:grid-cols-5 gap-4 mb-12">
-                ${pilares.map((item, i) => html`
-                  <div key=${i} className="bg-[#16161a] border border-slate-700 p-5 rounded-3xl flex flex-col justify-between">
-                    <div>
-                      <span className="text-lg font-black text-[#00aeef] block mb-2">${item.p}</span>
-                      <p className="text-sm text-white font-bold mb-3">${item.c}</p>
-                    </div>
-                    <div className="bg-black/40 p-3 rounded-xl border border-slate-800 text-xs text-slate-300">
-                      <strong className="text-[#f59e0b] block">Ej. en ropa:</strong> ${item.e}
-                    </div>
-                  </div>
-                `)}
-              </div>
+              <!-- Tarjeta 2: Omni Flash 1.1 -->
+              <div className="bg-slate-900 border-2 border-purple-500/50 rounded-[3.5rem] p-10 md:p-14 shadow-2xl flex flex-col justify-between">
+                <div>
+                  <span className="bg-purple-500 text-white text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-6">
+                    4 Videos / Día · 120 Gratis al Mes
+                  </span>
+                  <h4 className="text-4xl md:text-5xl font-black text-white mb-6">Omni Flash 1.1</h4>
+                  <p className="text-2xl text-slate-300 leading-relaxed mb-8">
+                    Videos de hasta <strong className="text-white">10 segundos</strong> con <strong className="text-purple-300">120 generaciones gratis al mes en 1 sola cuenta</strong> (y si tienes 2 o 3 cuentas de correo, ¡duplicas a 240 o triplicas a 360 videos gratis al mes!).
+                  </p>
+                  <ul className="space-y-4 text-xl text-slate-200 mb-8">
+                    <li className="flex items-center gap-3"><${CheckCircle} className="w-7 h-7 text-purple-400 shrink-0"/> <span><strong>Avatares con tu Rostro y Voz:</strong> Sales tú hablando sin volver a grabar.</span></li>
+                    <li className="flex items-center gap-3"><${CheckCircle} className="w-7 h-7 text-purple-400 shrink-0"/> <span><strong>Crear, Editar y Motion Control:</strong> Cambia escenarios y controla el movimiento.</span></li>
+                    <li className="flex items-center gap-3"><${CheckCircle} className="w-7 h-7 text-purple-400 shrink-0"/> <span><strong>Doble Uso:</strong> Para TikTok orgánico y para Anuncios Publicitarios.</span></li>
+                  </ul>
+                </div>
 
-              <div className="grid lg:grid-cols-3 gap-6 mb-12">
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <h5 className="text-xl font-black text-[#00aeef] mb-3">Banco de Ideas: Ropa</h5>
-                  <ul className="space-y-2 text-sm text-slate-200">
-                    <li>• Cómo medir una prenda que ya te queda bien.</li>
-                    <li>• Tres formas de combinar una blusa.</li>
-                    <li>• Detalles de costura que puedes revisar.</li>
-                    <li>• Cómo preparamos un pedido.</li>
-                    <li>• Qué información enviar para consultar una talla.</li>
-                    <li>• Presentación de un modelo disponible.</li>
-                  </ul>
-                </div>
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <h5 className="text-xl font-black text-[#f59e0b] mb-3">Banco de Ideas: Repostería</h5>
-                  <ul className="space-y-2 text-sm text-slate-200">
-                    <li>• Qué información necesitas para cotizar una torta.</li>
-                    <li>• Cómo elegir el tamaño según las porciones del negocio.</li>
-                    <li>• Diferencia entre dos opciones de decoración.</li>
-                    <li>• Cómo transportar el pedido.</li>
-                    <li>• Proceso real de preparación.</li>
-                    <li>• Disponibilidad para una fecha específica.</li>
-                  </ul>
-                </div>
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <h5 className="text-xl font-black text-emerald-400 mb-3">Banco de Ideas: Servicios</h5>
-                  <ul className="space-y-2 text-sm text-slate-200">
-                    <li>• Qué incluye y qué no incluye la atención.</li>
-                    <li>• Cómo preparar el espacio antes de la visita.</li>
-                    <li>• Qué información enviar para cotizar.</li>
-                    <li>• Explicación de un caso real autorizado.</li>
-                    <li>• Cuidados posteriores.</li>
-                    <li>• Horarios disponibles para reservar.</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="grid lg:grid-cols-12 gap-8">
-                <div className="lg:col-span-7 bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <h5 className="text-xl font-black text-white mb-4">Calendario Inicial Sostenible (4 Piezas Semanales)</h5>
-                  <div className="grid sm:grid-cols-2 gap-3 text-sm">
-                    <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800"><strong className="text-[#00aeef] block">1ª Publicación: Responder una pregunta</strong>Objetivo: Atraer personas interesadas.</div>
-                    <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800"><strong className="text-[#f59e0b] block">2ª Publicación: Mostrar un proceso</strong>Objetivo: Construir confianza.</div>
-                    <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800"><strong className="text-purple-400 block">3ª Publicación: Resolver una objeción</strong>Objetivo: Facilitar la decisión.</div>
-                    <div className="bg-slate-900 p-4 rounded-2xl border border-slate-800"><strong className="text-emerald-400 block">4ª Publicación: Presentar una oferta</strong>Objetivo: Generar consultas.</div>
-                  </div>
-                </div>
-                <div className="lg:col-span-5 bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <h5 className="text-xl font-black text-[#f59e0b] mb-3">Preparación por Bloques (En una misma sesión)</h5>
-                  <ul className="text-sm text-slate-200 space-y-2">
-                    <li>• Grabar respuestas a varias preguntas.</li>
-                    <li>• Fotografiar productos.</li>
-                    <li>• Registrar procesos reales.</li>
-                    <li>• Preparar textos y dejar piezas listas.</li>
-                  </ul>
+                <div className="prompt-box relative">
+                  <${CopyButton} text=${promptVideo} />
+                  <span className="text-xs font-bold uppercase tracking-widest text-purple-400 block mb-2">Prompt Maestro: Video 10s con Avatar</span>
+                  <p className="text-base text-emerald-100 leading-relaxed pr-28">${promptVideo}</p>
                 </div>
               </div>
             </div>
@@ -673,279 +575,91 @@
     };
 
     /* =========================================================================
-       SECCIONES 8 Y 9: QUÉ ES UNA SKILL + PAQUETE DE 6 SKILLS + GOOGLE FLOW
+       BLOQUE 6: QUÉ ES UNA SKILL + DIAGRAMA DE LAS 5 SKILLS + REGALO HASTA LAS 6 PM
        ========================================================================= */
-    const SkillsYGoogleFlowIntro = () => {
-      const paqueteSkills = [
-        { s: "1. Hub de Estrategia Digital", u: "Identificar prioridades del negocio." },
-        { s: "2. Estrategia de Contenidos", u: "Definir pilares, ideas, calendario y guiones." },
-        { s: "3. Campañas Publicitarias", u: "Preparar mensajes, objetivos y pruebas." },
-        { s: "4. Imágenes", u: "Dirigir fotografías y presentaciones visuales." },
-        { s: "5. Flyers y carruseles", u: "Ordenar el mensaje en piezas gráficas." },
-        { s: "6. Omni Flash", u: "Preparar videos con referencias, acción y diálogo." }
+    const SkillsYRegalo = () => {
+      const skillsList = [
+        {
+          num: "01",
+          title: "Skill de Estrategia Digital",
+          desc: "Diagnostica tu negocio, define tu oferta ganadora y ordena tu embudo comercial.",
+          color: "border-[#00aeef] text-[#00aeef]"
+        },
+        {
+          num: "02",
+          title: "Skill de Marketing de Contenidos",
+          desc: "Construye tus 5 pilares, tu calendario semanal y tus guiones persuasivos para TikTok.",
+          color: "border-[#f59e0b] text-[#f59e0b]"
+        },
+        {
+          num: "03",
+          title: "Skill de Campañas Publicitarias",
+          desc: "Estructura tus anuncios de pago, ángulos de venta y pruebas de presupuesto.",
+          color: "border-rose-500 text-rose-400"
+        },
+        {
+          num: "04",
+          title: "Skill de Imágenes, Flyers y Carruseles",
+          desc: "Crea los prompts exactos para Nano Banana 2.1 cuidando colores, textos y producto.",
+          color: "border-emerald-500 text-emerald-400"
+        },
+        {
+          num: "05",
+          title: "Skill de Videos en Omni Flash",
+          desc: "Estructura tus videos con avatar, voz, encuadres de cámara y motion control.",
+          color: "border-purple-500 text-purple-400"
+        }
       ];
-
-      const demoSkillPrompt = `Usa la skill de estrategia de contenidos que he cargado. Trabajaremos un caso ficticio: una tienda de blusas en Surquillo que atiende por WhatsApp. Sus principales consultas son tallas, colores y entregas. Tiene tiempo para producir cuatro publicaciones semanales. Ayúdame a organizar cinco pilares, proponer ocho ideas y elegir cuatro para esta semana. Explica qué decisión del cliente ayuda a resolver cada pieza. No inventes características, testimonios ni resultados.`;
 
       return html`
         <section id="skills" className="bg-[#111827] border-t border-slate-800 slide-container">
           <div className="container mx-auto px-6 max-w-[1600px]">
             <div className="text-center mb-16">
-              <h2 className="text-xl font-black text-purple-400 uppercase tracking-[0.2em] mb-3">8. Qué es una Skill y cómo ayuda</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-white mb-4">De Pedir “Ideas Sueltas” a Trabajar con Método</h3>
-              <p className="text-xl text-slate-300 max-w-4xl mx-auto">
-                Una skill reúne instrucciones y recursos para que la IA siga un método en una tarea repetida: define qué información pedir, qué pasos seguir, qué errores evitar, qué resultado entregar y qué ejemplos utilizar.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4 mt-4 text-xs font-bold text-[#00aeef]">
-                <a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noreferrer" className="underline">Documentación OpenAI</a>
-                <span>·</span>
-                <a href="https://support.google.com/gemini/answer/17094296?hl=en" target="_blank" rel="noreferrer" className="underline">Documentación Gemini</a>
-                <span>·</span>
-                <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" target="_blank" rel="noreferrer" className="underline">Documentación Claude</a>
-              </div>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-8 mb-12">
-              <div className="bg-rose-950/30 border border-rose-500/40 p-8 rounded-3xl">
-                <span className="text-xs font-black uppercase tracking-widest text-rose-400 block mb-2">Petición General (Sin Skill)</span>
-                <p className="text-2xl font-bold text-white">“Dame ideas para mi tienda.”</p>
-              </div>
-              <div className="bg-emerald-950/30 border border-emerald-500/40 p-8 rounded-3xl">
-                <span className="text-xs font-black uppercase tracking-widest text-emerald-400 block mb-2">Petición con Contexto y Método (Con Skill)</span>
-                <p className="text-lg font-bold text-white leading-relaxed">
-                  “Usa la skill de estrategia de contenidos. Mi negocio vende blusas y mis clientes tienen dudas sobre tallas, combinaciones y entregas. Organiza ideas por objetivo y prioriza cuatro piezas que pueda producir esta semana.”
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-slate-900 border border-purple-500/40 rounded-[3.5rem] p-8 md:p-12 shadow-2xl mb-16">
-              <h4 className="text-2xl md:text-3xl font-black text-white mb-6 text-center">Mapa del Paquete de 6 Skills para el Emprendedor</h4>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-                ${paqueteSkills.map((item, idx) => html`
-                  <div key=${idx} className="bg-[#16161a] border border-slate-700 p-6 rounded-2xl">
-                    <strong className="text-lg font-black text-purple-400 block mb-1">${item.s}</strong>
-                    <span className="text-slate-200 text-base">${item.u}</span>
-                  </div>
-                `)}
-              </div>
-              <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-center mb-8">
-                <strong className="text-[#f59e0b] uppercase text-xs tracking-widest block mb-1">Orden de Uso Recomendado</strong>
-                <p className="text-xl font-black text-white">Diagnóstico → Estrategia → Producción → Publicación → Medición</p>
-              </div>
-              <div className="prompt-box relative">
-                <${CopyButton} text=${demoSkillPrompt} />
-                <span className="text-xs font-bold uppercase tracking-widest text-purple-400 block mb-2">Prompt Copiable — Demostración de Estrategia en Vivo (Surquillo)</span>
-                <p className="text-base sm:text-lg text-emerald-100 leading-relaxed pr-24">${demoSkillPrompt}</p>
-                <p className="text-xs text-slate-400 mt-3 font-sans">Límite importante: La skill organiza el trabajo. El emprendedor debe aportar los datos reales y revisar el resultado.</p>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-indigo-950/50 to-slate-900 border-2 border-indigo-500/40 rounded-[3.5rem] p-8 md:p-12 shadow-2xl">
-              <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-widest text-indigo-400 block mb-1">9. Google Flow: De la Idea a la Pieza</span>
-                  <h4 className="text-3xl md:text-4xl font-black text-white">Nano Banana 2.1 (Imagen) + Omni Flash 1.1 (Video)</h4>
-                </div>
-                <div className="flex gap-3 text-xs font-bold text-[#00aeef]">
-                  <a href="https://support.google.com/flow/answer/16352836?hl=en" target="_blank" rel="noreferrer" className="underline">Guía Google Flow</a>
-                  <span>·</span>
-                  <a href="https://support.google.com/flow/answer/16526234?hl=en" target="_blank" rel="noreferrer" className="underline">Tabla de Créditos</a>
-                </div>
-              </div>
-
-              <div className="grid lg:grid-cols-3 gap-6">
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <strong className="text-lg font-black text-indigo-300 block mb-3">Qué mostrar en Flow</strong>
-                  <ul className="text-sm text-slate-200 space-y-1.5">
-                    <li>• Imágenes de producto (Nano Banana 2.1).</li>
-                    <li>• Piezas gráficas y secuencias para carruseles.</li>
-                    <li>• Videos de 4, 6, 8 y 10 s (Omni Flash 1.1).</li>
-                    <li>• Referencias visuales y Avatares.</li>
-                    <li>• Edición de material existente.</li>
-                  </ul>
-                </div>
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-indigo-500/40">
-                  <strong className="text-lg font-black text-[#f59e0b] block mb-3">Acceso Gratuito: 50 Créditos Diarios</strong>
-                  <p className="text-sm text-slate-300 mb-3">Sin acumulación de créditos diarios no usados. Referencia Omni a 720p:</p>
-                  <div className="space-y-2 text-sm">
-                    <div className="bg-black/40 p-2.5 rounded-xl flex justify-between"><span>Clip de 8 segundos:</span><strong className="text-emerald-400">12 créditos</strong></div>
-                    <div className="bg-black/40 p-2.5 rounded-xl flex justify-between"><span>Clip de 10 segundos:</span><strong className="text-[#00aeef]">15 créditos</strong></div>
-                  </div>
-                  <p className="text-xs text-slate-400 mt-3">4 generaciones de 8 s consumen 48 créditos (“120 al mes” es proyección de uso en 30 días, no cuota mensual acumulada).</p>
-                </div>
-                <div className="bg-[#16161a] p-6 rounded-3xl border border-slate-800">
-                  <strong className="text-lg font-black text-emerald-400 block mb-3">Recursos para llevar preparados</strong>
-                  <ul className="text-sm text-slate-200 space-y-1.5">
-                    <li>• Foto real del producto y logo (si existe).</li>
-                    <li>• Información comercial confirmada.</li>
-                    <li>• Avatar propio ya creado.</li>
-                    <li>• Una imagen y un video ya terminados.</li>
-                    <li>• Capturas del proceso por si demora la red.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 10, 11, 12 Y 13: PRODUCCIÓN VISUAL EN FLOW (IMÁGENES, FLYERS, CARRUSELES Y VIDEOS)
-       ========================================================================= */
-    const FlowProduccionVisual = () => {
-      const promptCatalogo = `Utiliza la fotografía adjunta como referencia principal de la blusa. Conserva su corte, color, estampado, botones, mangas, costuras y proporciones visibles.
-Crea una fotografía comercial de catálogo. Presenta la misma blusa de forma ordenada, centrada y completamente visible. Colócala sobre una superficie mate de tono marfil #F5F0E8, con fondo limpio del mismo tono.
-Ilumina con una fuente suave desde arriba a la izquierda, aproximadamente a 45 grados, y un relleno tenue desde la derecha. Mantén una textura de tela natural y sombras suaves que permitan distinguir los detalles.
-El producto ocupa la mayor parte del encuadre. Primer plano despejado, blusa en el plano principal y fondo discreto.
-Conserva el aspecto real del producto, con enfoque nítido y acabado de fotografía comercial. Entrega la imagen sin texto añadido ni elementos promocionales.
-Evita deformaciones, botones adicionales, estampados diferentes, cambios de material, colores alterados y detalles inventados.`;
-
-      const promptFlyer = `Diseña una pieza publicitaria vertical 4:5 para la tienda ficticia “Viste Bonito”, utilizando la fotografía adjunta de la blusa.
-Preserva el diseño, color, estampado y proporciones del producto.
-Dirección visual: fotografía comercial de moda con composición limpia. La blusa será el elemento principal y ocupará aproximadamente el 60% del diseño. El bloque de texto ocupará un área secundaria con alto contraste.
-Usa una paleta marfil #F5F0E8, azul oscuro #17324D y un acento coral #D96555.
-Primer plano con una superficie de madera clara, producto en el plano central y fondo marfil discreto. Iluminación suave desde arriba a la izquierda, con sombras naturales.
-Coloca el título “COMBINA A TU MANERA” en tipografía sans serif gruesa de color azul oscuro.
-Añade “Blusa S/49” con jerarquía secundaria clara.
-Incluye “Consulta medidas y colores” y, como llamada a la acción, “Escríbenos por WhatsApp”.
-Reserva márgenes amplios para que el texto se lea en un celular. Mantén el protagonismo del producto.
-No añadas teléfonos, direcciones, descuentos, testimonios ni sellos.
-Acabado nítido de diseño publicitario. Evita letras deformadas, información adicional, producto alterado y elementos que distraigan.`;
-
-      const promptCarrusel = `Crea una tarjeta vertical 4:5 para un carrusel educativo de la tienda ficticia “Viste Bonito”.
-Mantén una identidad visual con fondo marfil #F5F0E8, títulos azul oscuro #17324D y acentos coral #D96555.
-Usa títulos grandes, texto breve y una ilustración o fotografía que explique una sola acción.
-El título exacto de esta tarjeta es: “Compara con una prenda que te quede bien”.
-Muestra una blusa extendida sobre una mesa, sin atribuirle medidas específicas.
-Iluminación suave desde arriba a la izquierda. Composición limpia y legible en móvil.
-Añade “2/5” de forma discreta en la esquina inferior.
-Evita párrafos largos, números de medidas inventados y elementos decorativos que dificulten la comprensión.`;
-
-      const promptVideoAvatar = `Genera un video vertical de diez segundos para la tienda ficticia “Viste Bonito”.
-Usa mi avatar seleccionado en Flow y conserva su rostro y su voz asociados. El avatar viste una camisa blanca y un saco azul oscuro.
-Usa la foto adjunta como referencia de la blusa. Conserva su corte, color, estampado y botones.
-El avatar está en un ambiente sencillo de tienda, junto a la blusa colocada en una percha. Mira a cámara y hace un gesto natural hacia la prenda, sin taparla.
-Cámara a la altura de los ojos, plano medio y acercamiento suave. Iluminación cálida y uniforme.
-Con su propia voz, en español latino, dice con ritmo conversacional:
-“¿Dudas con tu talla? Compara las medidas con una blusa que ya te quede bien. Escríbenos y revisamos las opciones”.
-Mantén el producto visible y estable. Termina con el avatar mirando a cámara.
-Audio de voz claro, ambiente discreto y sin rótulos añadidos.`;
-
-      const promptVideoProducto = `Crea un video vertical de ocho segundos a partir de la fotografía adjunta.
-Conserva exactamente la blusa y su presentación. Realiza un acercamiento suave que permita observar el estampado y los botones visibles.
-Mantén la prenda inmóvil y utiliza el movimiento de cámara para aportar dinamismo.
-Iluminación suave de estudio, textura natural de la tela y fondo discreto.
-Termina con el producto completo en el encuadre. Sonido instrumental tenue, sin diálogo ni texto añadido.`;
-
-      const promptVideoEdicion = `Conserva el producto, la persona, la acción y el diálogo del video. Cambia únicamente el fondo por un ambiente de tienda con pared marfil y un perchero discreto. Mantén una iluminación coherente con la persona y conserva el ritmo original.`;
-
-      return html`
-        <section id="flow-visual" className="bg-[#0a0a0a] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <div className="text-center mb-16">
-              <h2 className="text-xl font-black text-purple-400 uppercase tracking-[0.2em] mb-3">Secciones 10, 11, 12 y 13 · Laboratorio Google Flow</h2>
-              <h3 className="text-4xl md:text-6xl font-black text-white mb-4">Catálogo, Flyers, Carruseles y Videos con IA</h3>
-              <p className="text-xl text-slate-300 max-w-4xl mx-auto">
-                Mejorar la presentación manteniendo las características reales del producto que recibirá el cliente.
+              <h2 className="text-2xl font-black text-emerald-400 uppercase tracking-[0.2em] mb-4">El Secreto de los Profesionales</h2>
+              <h3 className="text-5xl md:text-7xl font-black text-white mb-6">¿Qué es una Skill de IA?</h3>
+              <p className="text-2xl md:text-3xl text-slate-300 max-w-5xl mx-auto leading-relaxed">
+                Es un paquete de conocimiento experto que instalas en <strong className="text-[#00aeef]">Gemini</strong>, <strong className="text-[#f59e0b]">Claude</strong> o <strong className="text-emerald-400">ChatGPT</strong> para que la IA trabaje como tu agencia de marketing paso a paso.
               </p>
             </div>
 
-            <!-- SECCIÓN 10: NANO BANANA CATÁLOGO -->
-            <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-12 mb-12 shadow-2xl">
-              <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-                <h4 className="text-2xl md:text-3xl font-black text-[#00aeef]">10. Imágenes de Producto con Nano Banana</h4>
-                <span className="text-xs font-bold bg-slate-800 text-slate-200 px-4 py-2 rounded-full">Antes de generar: fotografiar producto completo, detalles, color neutro y etiquetas</span>
-              </div>
-              <div className="prompt-box relative mb-6">
-                <${CopyButton} text=${promptCatalogo} />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#00aeef] block mb-2">Prompt de ejemplo: Blusa para Catálogo (Cuadrado · Marfil #F5F0E8)</span>
-                <pre className="text-sm sm:text-base text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-24">${promptCatalogo}</pre>
-              </div>
-              <div className="grid md:grid-cols-3 gap-4 text-sm">
-                <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800"><strong className="text-[#f59e0b] block mb-1">Si cambió el estampado:</strong>“Conserva la composición, pero restaura exactamente el estampado visible en la referencia.”</div>
-                <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800"><strong className="text-[#f59e0b] block mb-1">Si perdió textura:</strong>“Recupera la textura real de la tela y reduce el alisado.”</div>
-                <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800"><strong className="text-[#f59e0b] block mb-1">Si modificó la forma:</strong>“Vuelve al corte original de la fotografía. Ajusta únicamente fondo e iluminación.”</div>
-              </div>
-              <p className="text-xs text-slate-400 mt-4">Adaptaciones: Comida (preservar porción e ingredientes) · Accesorios (tamaño relativo, cierres y materiales) · Servicios (fotos reales o identificar como ilustrativas).</p>
-            </div>
-
-            <!-- SECCIONES 11 Y 12: FLYERS Y CARRUSELES -->
-            <div className="grid lg:grid-cols-2 gap-10 mb-12">
-              <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-black text-[#f59e0b] mb-3">11. Flyers que Comunican una Oferta</h4>
-                  <p className="text-sm text-slate-300 mb-4">Estructura: 1) Mensaje principal · 2) Producto reconocible · 3) Información suficiente · 4) Acción clara. Caso didáctico: Viste Bonito presenta una blusa a S/49.</p>
-                  <div className="prompt-box relative mb-6">
-                    <${CopyButton} text=${promptFlyer} />
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#f59e0b] block mb-2">Prompt Copiable: Flyer Vertical 4:5 (“Viste Bonito” S/49)</span>
-                    <pre className="text-xs sm:text-sm text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-20">${promptFlyer}</pre>
-                  </div>
-                </div>
-                <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-xs text-slate-300">
-                  <strong className="text-white block mb-1">Revisión antes de publicar:</strong>
-                  ¿Se entiende en pocos segundos? · ¿El precio es correcto? · ¿El producto sigue siendo el mismo? · ¿El texto se lee desde el celular? · ¿El cliente sabe qué hacer?
-                </div>
-              </div>
-
-              <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-black text-emerald-400 mb-3">12. Carruseles para Ayudar a Elegir</h4>
-                  <p className="text-sm text-slate-300 mb-4">Secuencia de 5 tarjetas para “Cómo elegir la talla de tu blusa”:</p>
-                  <div className="space-y-1.5 text-xs mb-5">
-                    <div className="bg-[#16161a] p-2.5 rounded-xl flex justify-between"><strong className="text-white">1. “¿Dudas entre dos tallas?”</strong><span className="text-slate-400">Pregunta concreta</span></div>
-                    <div className="bg-[#16161a] p-2.5 rounded-xl flex justify-between border border-emerald-500/40"><strong className="text-emerald-400">2. “Compara con una prenda que te quede bien”</strong><span className="text-slate-300">Punto de partida</span></div>
-                    <div className="bg-[#16161a] p-2.5 rounded-xl flex justify-between"><strong className="text-white">3. “Mide el ancho y el largo con la prenda extendida”</strong><span className="text-slate-400">Explicar acción</span></div>
-                    <div className="bg-[#16161a] p-2.5 rounded-xl flex justify-between"><strong className="text-white">4. “Revisa las medidas del modelo que quieres”</strong><span className="text-slate-400">Conectar catálogo</span></div>
-                    <div className="bg-[#16161a] p-2.5 rounded-xl flex justify-between"><strong className="text-white">5. “Envíanos tus medidas y el modelo por WhatsApp”</strong><span className="text-slate-400">Facilitar consulta</span></div>
-                  </div>
-                  <div className="prompt-box relative">
-                    <${CopyButton} text=${promptCarrusel} />
-                    <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 block mb-2">Prompt de Estilo Copiable: Tarjeta 2/5 (Vertical 4:5)</span>
-                    <pre className="text-xs sm:text-sm text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-20">${promptCarrusel}</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 13: VIDEOS CON OMNI FLASH 1.1 -->
-            <div className="bg-slate-900 border-2 border-purple-500/40 rounded-[3.5rem] p-8 md:p-12 shadow-2xl">
-              <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-                <div>
-                  <h4 className="text-2xl md:text-4xl font-black text-white">13. Videos con Omni Flash 1.1</h4>
-                  <p className="text-base text-purple-300 font-bold mt-1">Fórmula: Quién aparece + qué hace + dónde + qué debe conservarse + cómo se graba + qué dice + cómo termina.</p>
-                </div>
-                <a href="https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content?authuser=0" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#00aeef] underline">Norma Etiqueta IA en TikTok</a>
-              </div>
-
-              <div className="grid sm:grid-cols-5 gap-3 mb-8 text-xs">
-                <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-purple-400 block mb-1">1. Texto a video</strong>Construir una escena desde una descripción.</div>
-                <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-purple-400 block mb-1">2. Ingredientes / Ref.</strong>Orientar identidad, producto y contexto.</div>
-                <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-purple-400 block mb-1">3. Fotograma inicial</strong>Definir la imagen exacta de arranque.</div>
-                <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-purple-400 block mb-1">4. Primer y último</strong>Orientar dos estados visuales.</div>
-                <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-purple-400 block mb-1">5. Edición de video</strong>Solicitar cambios sobre material existente.</div>
-              </div>
-
-              <div className="grid lg:grid-cols-3 gap-6 mb-6">
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${promptVideoAvatar} />
-                  <span className="text-xs font-bold uppercase tracking-widest text-purple-400 block mb-2">13.1. Demo con Avatar Propio (10 s · 9:16)</span>
-                  <pre className="text-xs text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-16">${promptVideoAvatar}</pre>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${promptVideoProducto} />
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#00aeef] block mb-2">13.2. Demo Sin Avatar — Solo Producto (8 s)</span>
-                  <pre className="text-xs text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-16">${promptVideoProducto}</pre>
-                </div>
-                <div className="prompt-box relative flex flex-col justify-between">
+            <!-- Diagrama de las 5 Skills Esenciales -->
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
+              ${skillsList.map((s, idx) => html`
+                <div key=${idx} className=${`bg-[#16161a] border-t-[6px] ${s.color.split(' ')[0]} rounded-[2.5rem] p-8 shadow-2xl flex flex-col justify-between hover:-translate-y-2 transition-transform`}>
                   <div>
-                    <${CopyButton} text=${promptVideoEdicion} />
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#f59e0b] block mb-2">13.3. Demo de Edición de Video</span>
-                    <pre className="text-xs text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-16">${promptVideoEdicion}</pre>
+                    <span className=${`text-4xl font-black ${s.color.split(' ')[1]} block mb-4`}>${s.num}</span>
+                    <h4 className="text-2xl font-black text-white mb-4 leading-snug">${s.title}</h4>
+                    <p className="text-lg text-slate-300 leading-relaxed">${s.desc}</p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-slate-800 font-sans text-xs text-slate-300 space-y-2">
-                    <p><strong className="text-white">Clips de 20 segundos:</strong> Dividir el mensaje en 2 clips, repetir identidad/vestuario/entorno, definir cómo termina el 1º y empieza el 2º, revisar empalme.</p>
-                    <p><strong className="text-emerald-400">Checklist revisión:</strong> Fidelidad del producto, rostro y voz, manos, diálogo completo, duración, textos y continuidad.</p>
+                </div>
+              `)}
+            </div>
+
+            <!-- Banner Gigante de Regalo hasta las 6:00 PM -->
+            <div className="bg-gradient-to-r from-[#f59e0b] to-[#d97706] text-slate-950 rounded-[4rem] p-10 md:p-16 shadow-[0_0_90px_rgba(245,158,11,0.35)] border-4 border-yellow-300">
+              <div className="grid lg:grid-cols-12 gap-10 items-center">
+                <div className="lg:col-span-8 text-center lg:text-left">
+                  <span className="bg-slate-950 text-[#f59e0b] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-4">
+                    Regalo Exclusivo para el Auditorio
+                  </span>
+                  <h4 className="text-4xl sm:text-6xl font-black mb-4 leading-tight">
+                    Descarga Hoy las 5 Skills Gratis
+                  </h4>
+                  <p className="text-xl sm:text-2xl font-bold text-slate-900 leading-relaxed mb-6">
+                    Disponibles únicamente hoy <strong className="underline">hasta las 6:00 p. m.</strong> en el enlace de mi perfil de TikTok:
+                  </p>
+                  <a href="https://www.tiktok.com/@hugolopez.pe" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-slate-950 text-white px-8 py-5 rounded-full text-xl sm:text-2xl font-black hover:bg-[#1e3a8a] transition-all shadow-2xl">
+                    IR A TIKTOK: @HUGOLOPEZ.PE <${ArrowUpRight} className="w-7 h-7 text-[#f59e0b]"/>
+                  </a>
+                </div>
+
+                <div className="lg:col-span-4 bg-slate-950 text-white p-8 rounded-[3rem] text-center border-2 border-white/20 shadow-2xl">
+                  <${Gift} className="w-16 h-16 text-[#f59e0b] mx-auto mb-4"/>
+                  <p className="text-sm font-black uppercase tracking-widest text-slate-400">Búscame en TikTok como</p>
+                  <p className="text-3xl font-black text-[#00aeef] mt-1">@hugolopez.pe</p>
+                  <p className="text-xl font-black text-white mt-1">El Marketero del Pueblo</p>
+                  <div className="mt-5 bg-rose-500/20 border border-rose-400/50 text-rose-200 px-4 py-2.5 rounded-2xl text-sm font-black uppercase">
+                    ⏰ Cierra hoy a las 6:00 p. m.
                   </div>
                 </div>
               </div>
@@ -956,790 +670,77 @@ Termina con el producto completo en el encuadre. Sonido instrumental tenue, sin 
     };
 
     /* =========================================================================
-       SECCIONES 14, 15 Y 16: VIDEO QUE VENDE, PERFIL DE TIKTOK Y TIKTOK LIVE
+       BLOQUE 7: WHATSAPP BUSINESS AGENT + ANALÍTICA EN TIEMPO REAL CON WINDSOR.AI
        ========================================================================= */
-    const TikTokVideoPerfilYLive = () => {
-      const guionRopa = `Inicio: ¿Compras la talla de siempre y a veces no te queda igual?
-Desarrollo: Antes de elegir, compara las medidas de este modelo con una prenda que ya te quede bien. Aquí puedes ver cómo medimos el ancho y el largo.
-Cierre: Envíanos el modelo y tus medidas por WhatsApp y revisamos las opciones disponibles.`;
-
-      const guionReposteria = `Inicio: ¿Quieres cotizar una torta y no sabes qué información enviar?
-Desarrollo: Cuéntanos para qué fecha la necesitas, para cuántas personas y qué estilo buscas. Con eso podemos revisar disponibilidad y orientarte.
-Cierre: Escríbenos esos tres datos para comenzar.`;
-
-      const guionServicios = `Inicio: ¿Quieres cotizar la limpieza de tu sofá?
-Desarrollo: Envíanos una foto completa, indícanos el material si lo conoces y cuéntanos en qué distrito estás.
-Cierre: Con esa información podremos explicarte el alcance y revisar disponibilidad.`;
-
-      return html`
-        <section id="tiktok" className="bg-[#111827] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <!-- SECCIÓN 14 -->
-            <div className="mb-20">
-              <div className="text-center mb-12">
-                <h2 className="text-xl font-black text-rose-400 uppercase tracking-[0.2em] mb-3">14. Estructura de un Video que Ayuda a Vender</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-white mb-4">Pregunta o Situación → Explicación o Demostración → Siguiente Paso</h3>
-              </div>
-              <div className="grid lg:grid-cols-3 gap-6 mb-8">
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${guionRopa} />
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#00aeef] block mb-2">Ejemplo 1: Ropa (Blusas)</span>
-                  <pre className="text-sm text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-16">${guionRopa}</pre>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${guionReposteria} />
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#f59e0b] block mb-2">Ejemplo 2: Repostería (Tortas)</span>
-                  <pre className="text-sm text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-16">${guionReposteria}</pre>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${guionServicios} />
-                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 block mb-2">Ejemplo 3: Servicios (Limpieza)</span>
-                  <pre className="text-sm text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-16">${guionServicios}</pre>
-                </div>
-              </div>
-              <div className="bg-slate-900 border border-slate-700 p-6 rounded-3xl text-center">
-                <strong className="text-[#f59e0b] uppercase text-xs tracking-widest block mb-2">7 Factores que revisar antes de publicar (No existe cantidad de hashtags ni frase mágica que garantice alcance):</strong>
-                <p className="text-base text-slate-200 font-medium">
-                  1. El comienzo es claro · 2. La pieza responde lo prometido · 3. El producto o proceso se ve · 4. La voz se entiende · 5. Los subtítulos ayudan · 6. La descripción utiliza términos pertinentes · 7. El cierre facilita una acción.
-                </p>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 15 Y 16 -->
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-5 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-black text-[#00aeef] mb-4">15. Perfil de TikTok Preparado para Visitas</h4>
-                  <ul className="space-y-3 text-sm text-slate-200 mb-6">
-                    <li className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-white">Foto:</strong> Reconocible y coherente con el negocio.</li>
-                    <li className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-white">Nombre:</strong> Ayuda a identificar qué ofrece. Ej: <code className="text-[#00aeef]">Viste Bonito | Blusas</code></li>
-                    <li className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-white">Biografía:</strong> “Blusas para tus combinaciones de oficina. Consulta medidas y disponibilidad. Pedidos por WhatsApp.”</li>
-                    <li className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-white">Enlace y 3 Videos Fijados:</strong> 1) Qué vende y quién está detrás · 2) Cómo elegir o usar el producto · 3) Cómo consultar y comprar.</li>
-                  </ul>
-                  <div className="bg-blue-950/40 border border-[#00aeef]/40 p-4 rounded-2xl text-xs text-slate-200 mb-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <strong className="text-[#00aeef] uppercase">Verificación Empresarial en Perú (RUC 10 / RUC 20)</strong>
-                      <a href="https://ads.tiktok.com/resources/help/article/acceptable-documents-for-business-verification?lang=en-GB" target="_blank" rel="noreferrer" className="underline text-[#00aeef]">Fuente TikTok</a>
-                    </div>
-                    Mostrar dónde aparece la opción, documentación tributaria aceptada en Perú e importancia de que los datos coincidan. La verificación empresarial, el check azul y el alta de TikTok Shop son procesos diferentes.
-                  </div>
-                </div>
-                <div className="bg-amber-950/30 border border-amber-500/40 p-4 rounded-2xl text-xs text-amber-100">
-                  <div className="flex justify-between items-center mb-1">
-                    <strong className="text-[#f59e0b] uppercase">Nota Transparente sobre TikTok Shop</strong>
-                    <a href="https://ads.tiktok.com/resources/help/article/tiktok-shopping-and-showcase?lang=es" target="_blank" rel="noreferrer" className="underline text-[#f59e0b]">Fuente Oficial</a>
-                  </div>
-                  La página oficial consultada, actualizada en junio de 2026, no incluye Perú entre los mercados publicados. No prometer habilitación automática por contar con RUC.
-                </div>
-              </div>
-
-              <div className="lg:col-span-7 bg-slate-900 border-2 border-rose-500/40 rounded-[3.5rem] p-8 md:p-10 shadow-2xl">
-                <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
-                  <h4 className="text-2xl md:text-3xl font-black text-rose-400">16. TikTok LIVE para Construir Confianza</h4>
-                  <span className="bg-rose-500/20 text-rose-300 text-xs font-black px-3 py-1 rounded-full uppercase">Mostrar → explicar → preguntar → responder → indicar cómo consultar</span>
-                </div>
-                <p className="text-sm text-slate-300 mb-4">
-                  <strong className="text-white">Preparación:</strong> Acceso habilitado, conexión estable, celular cargado, luz suficiente, audio entendible, productos preparados, precios/disponibilidad a mano, ruta de consulta definida y apoyo en mensajes.
-                </p>
-                <div className="grid sm:grid-cols-2 gap-3 text-xs mb-5">
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-rose-400 block mb-1">1. Inicio y Presentación</strong>“Hoy vamos a mostrar cómo elegir y combinar nuestras blusas. Si tienes dudas sobre medidas, déjalas en los comentarios. Este es el modelo que estamos revisando...”</div>
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-rose-400 block mb-1">2. Demostración</strong>Mostrar la prenda completa, acercar detalles, explicar cómo se mide y presentar una combinación.</div>
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-rose-400 block mb-1">3. Interacción</strong>“¿Qué te cuesta más elegir cuando compras ropa por Internet: la talla, el color o cómo combinarla?”</div>
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-rose-400 block mb-1">4. Ruta Comercial y Recapitulación</strong>“Envíanos por WhatsApp el modelo, tu talla o medidas y tu distrito.” Repetir el contexto para quienes van llegando.</div>
-                </div>
-                <div className="bg-gradient-to-r from-blue-950/60 to-slate-950 border border-[#00aeef]/40 p-5 rounded-2xl mb-4">
-                  <strong className="text-[#f59e0b] text-xs uppercase tracking-widest block mb-1">Experiencia Personal de Hugo López:</strong>
-                  <p className="text-sm text-white italic">“Durante meses transmití para grupos pequeños. Eso me permitió practicar, escuchar preguntas y mejorar la forma de explicar.”</p>
-                  <p className="text-xs text-slate-400 mt-1">El aprendizaje está en la constancia y la conversación (30, 45 min o más según recursos), sin prometer los mismos resultados a todos.</p>
-                </div>
-                <p className="text-xs text-slate-300">
-                  <strong className="text-emerald-400">6 Indicadores del LIVE:</strong> Tiempo de visualización · Preguntas relevantes · Participación · Visitas al perfil · Consultas posteriores · Pedidos identificados.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 17 Y 18: WHATSAPP BUSINESS Y META BUSINESS AGENT
-       ========================================================================= */
-    const WhatsAppYMetaAgent = () => {
-      const respuestasRapidas = [
-        { t: "1. Para orientar una consulta", m: "¡Hola! Gracias por escribirnos. Cuéntame qué modelo te interesa y en qué distrito estás para revisar disponibilidad y entrega." },
-        { t: "2. Para talla", m: "Te comparto las medidas del modelo. Puedes compararlas con una prenda que te quede bien. Si me envías esa información, te ayudo a revisar las opciones." },
-        { t: "3. Para entrega", m: "Antes de confirmar, revisaremos el costo y plazo de entrega para tu distrito." },
-        { t: "4. Para servicios", m: "Envíanos una foto o descripción de lo que necesitas y tu distrito. Revisaremos el alcance y disponibilidad antes de cotizar." },
-        { t: "5. Seguimiento respetuoso", m: "Hola, te escribo para saber si quedó alguna duda sobre el modelo que consultaste. Si todavía te interesa, podemos revisar disponibilidad." }
-      ];
-
-      const baseAgente = `NEGOCIO FICTICIO: VISTE BONITO
-Vendemos blusas y atendemos consultas por WhatsApp.
-
-Objetivo: Ayudar a conocer los productos, resolver dudas básicas y reunir información para que una persona confirme el pedido.
-Tono: Cercano, claro y respetuoso. Respuestas breves y una pregunta a la vez cuando sea posible.
-Producto de demostración: Blusa Alba, código ALBA-01, precio S/49.
-Disponibilidad: El stock debe confirmarlo una persona del negocio. No afirmar disponibilidad en tiempo real si no existe una conexión actualizada.
-Tallas: Compartir únicamente la tabla de medidas proporcionada. Si faltan datos, solicitar apoyo del equipo.
-Entregas: Solicitar distrito. El equipo confirma cobertura, costo y fecha antes del pago.
-Pagos: Una persona verifica el abono en la cuenta del negocio. Una captura enviada por el cliente no basta para afirmar que el pago fue recibido.
-Datos necesarios: Modelo, variante solicitada, distrito y fecha requerida cuando corresponda.
-Derivar a una persona: Reclamos, devoluciones, descuentos especiales, problemas de pago, datos contradictorios, solicitudes fuera del catálogo o petición del cliente.
-Reglas:
-- No inventar promociones, disponibilidad, plazos, políticas ni características.
-- No solicitar claves, contraseñas ni códigos de verificación.
-- Si falta información, explicar qué debe confirmar el equipo.`;
+    const WhatsAppYAnalitica = () => {
+      const promptAnalitica = `Analiza en tiempo real mi cuenta de TikTok conectada con Windsor.ai. Muéstrame cuáles de mis últimos videos tienen mayor retención, más guardados y mayor conversión a seguidores, qué temas busca más mi audiencia y dame 3 ideas de videos nuevos para grabar esta semana.`;
 
       return html`
         <section id="whatsapp" className="bg-[#0a0a0a] border-t-[4px] border-[#25D366] slide-container">
           <div className="container mx-auto px-6 max-w-[1600px]">
-            <!-- SECCIÓN 17 -->
-            <div className="mb-20">
-              <div className="text-center mb-12">
-                <h2 className="text-xl font-black text-[#25D366] uppercase tracking-[0.2em] mb-3">17. WhatsApp Business como Centro de Atención</h2>
-                <h3 className="text-4xl md:text-5xl font-black text-white mb-4">Catálogo, Carrito, 8 Etiquetas y 5 Respuestas Rápidas</h3>
-                <p className="text-base text-slate-300 max-w-4xl mx-auto">
-                  Preparación mínima: Perfil completo, horarios, descripción clara, catálogo, respuestas rápidas, etiquetas, mensaje de bienvenida, mensaje de ausencia y procedimiento para registrar pedidos.
-                </p>
-              </div>
-
-              <div className="grid lg:grid-cols-12 gap-8 mb-10">
-                <div className="lg:col-span-5 bg-slate-900 border border-slate-700 rounded-[3rem] p-8 shadow-2xl">
-                  <div className="flex justify-between items-center mb-4">
-                    <h4 className="text-2xl font-black text-white">Ficha de Catálogo & Carrito</h4>
-                    <a href="https://faq.whatsapp.com/5495780857144067/?cms_platform=android" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#25D366] underline">Fuente WhatsApp</a>
-                  </div>
-                  <div className="bg-[#16161a] border border-[#25D366]/40 p-5 rounded-2xl mb-4 text-sm">
-                    <span className="text-xs font-black uppercase text-[#25D366] block mb-1">Ejemplo Didáctico de Catálogo</span>
-                    <p className="text-white font-bold">Producto: Blusa Alba · Código: ALBA-01 · Precio: S/49</p>
-                    <p className="text-slate-300 mt-1">Descripción: consultar las medidas del modelo y colores disponibles antes de confirmar.</p>
-                    <p className="text-slate-400 text-xs mt-1">Entrega: costo y plazo según distrito, informados antes del pago.</p>
-                  </div>
-                  <p className="text-xs text-slate-300 mb-4">
-                    <strong className="text-white">Demostración del comprador:</strong> Abrir catálogo → Revisar producto → Agregar al carrito → Enviar pedido como mensaje → Confirmación posterior del negocio.
+            <div className="grid lg:grid-cols-2 gap-12 mb-20">
+              <!-- Columna 1: Meta Business Agent de WhatsApp -->
+              <div className="bg-gradient-to-br from-emerald-950/40 to-slate-900 border-2 border-[#25D366]/50 rounded-[3.5rem] p-10 md:p-14 shadow-2xl flex flex-col justify-between">
+                <div>
+                  <span className="bg-[#25D366] text-[#0f172a] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-6">
+                    Atención con IA en WhatsApp
+                  </span>
+                  <h3 className="text-4xl md:text-5xl font-black text-white mb-6">Meta Business Agent</h3>
+                  <p className="text-2xl text-slate-300 leading-relaxed mb-8">
+                    El <strong className="text-white">agente de IA oficial de Meta</strong> dentro de WhatsApp Business (gratuito con cuota de mensajes). Responde al instante mientras estás produciendo o atendiendo.
                   </p>
-                  <strong className="text-xs font-black uppercase tracking-widest text-[#00aeef] block mb-2">Las 8 Etiquetas Propuestas:</strong>
-                  <div className="flex flex-wrap gap-2">
-                    ${["1. Consulta nueva", "2. Pendiente de información", "3. Pedido confirmado", "4. Pendiente de pago", "5. Pago verificado", "6. En preparación", "7. Entregado", "8. Seguimiento"].map((tag, i) => html`
-                      <span key=${i} className="bg-slate-800 border border-slate-700 text-white text-xs font-bold px-3 py-1.5 rounded-full">${tag}</span>
-                    `)}
+                  <div className="space-y-4 text-xl text-slate-200">
+                    <div className="bg-black/40 p-5 rounded-2xl border border-[#25D366]/30">
+                      <strong className="text-[#25D366] block mb-1">1. Entrénalo con tu Catálogo y Precios:</strong>
+                      Responde medidas, colores, cobertura y preguntas frecuentes sin inventar datos.
+                    </div>
+                    <div className="bg-black/40 p-5 rounded-2xl border border-[#25D366]/30">
+                      <strong className="text-[#25D366] block mb-1">2. Filtra y Pide los Datos del Pedido:</strong>
+                      Solicita producto, talla/variante y distrito para dejarte la venta lista.
+                    </div>
+                    <div className="bg-black/40 p-5 rounded-2xl border border-rose-500/30">
+                      <strong className="text-rose-400 block mb-1">3. Tú Confirmas el Pago Real:</strong>
+                      El agente atiende y ordena; tú verificas el abono en tu cuenta y cierras la venta cuidando tu margen.
+                    </div>
                   </div>
                 </div>
+              </div>
 
-                <div className="lg:col-span-7 bg-slate-900 border border-slate-700 rounded-[3rem] p-8 shadow-2xl">
-                  <h4 className="text-2xl font-black text-[#25D366] mb-4">5 Respuestas Rápidas Listas para Copiar</h4>
-                  <div className="space-y-3">
-                    ${respuestasRapidas.map((r, i) => html`
-                      <div key=${i} className="bg-[#16161a] border border-slate-800 p-4 rounded-2xl relative pr-28">
-                        <${CopyButton} text=${r.m} />
-                        <strong className="text-xs font-black uppercase text-[#f59e0b] block mb-1">${r.t}</strong>
-                        <p className="text-sm text-slate-200">${r.m}</p>
-                      </div>
-                    `)}
-                  </div>
-                  <p className="text-xs text-slate-400 mt-3">Nota ética: Evitar insistir repetidamente cuando la persona no desea continuar.</p>
+              <!-- Columna 2: Analítica en Tiempo Real con Windsor.ai -->
+              <div className="bg-gradient-to-br from-blue-950/40 to-slate-900 border-2 border-[#00aeef]/50 rounded-[3.5rem] p-10 md:p-14 shadow-2xl flex flex-col justify-between">
+                <div>
+                  <span className="bg-[#00aeef] text-[#0f172a] text-sm font-black px-5 py-2 rounded-full uppercase tracking-widest inline-block mb-6">
+                    Analítica Conversacional en Vivo
+                  </span>
+                  <h3 className="text-4xl md:text-5xl font-black text-white mb-6">Windsor.ai + Claude / ChatGPT / Gemini</h3>
+                  <p className="text-2xl text-slate-300 leading-relaxed mb-8">
+                    Conecta tu cuenta de TikTok mediante <strong className="text-white">Windsor.ai</strong> a tu asistente de IA favorito para analizar <strong className="text-[#00aeef]">todo lo que pasa en tu cuenta en tiempo real</strong> directamente desde el chat.
+                  </p>
+                  <ul className="space-y-4 text-xl text-slate-200 mb-8">
+                    <li className="flex items-center gap-3"><${BarChart3} className="w-7 h-7 text-[#00aeef] shrink-0"/> <span>Descubre qué videos retienen más y traen seguidores reales.</span></li>
+                    <li className="flex items-center gap-3"><${BarChart3} className="w-7 h-7 text-[#00aeef] shrink-0"/> <span>Pregunta en lenguaje natural sin armar cuadros complejos en Excel.</span></li>
+                    <li className="flex items-center gap-3"><${BarChart3} className="w-7 h-7 text-[#00aeef] shrink-0"/> <span>Convierte tus métricas de la semana en tus próximos guiones ganadores.</span></li>
+                  </ul>
+                </div>
+
+                <div className="prompt-box relative">
+                  <${CopyButton} text=${promptAnalitica} />
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#00aeef] block mb-2">Prompt Maestro: Auditoría TikTok con Windsor.ai</span>
+                  <p className="text-base text-emerald-100 leading-relaxed pr-28">${promptAnalitica}</p>
                 </div>
               </div>
             </div>
 
-            <!-- SECCIÓN 18: META BUSINESS AGENT -->
-            <div id="agente" className="bg-gradient-to-br from-emerald-950/40 to-slate-900 border-2 border-[#25D366]/50 rounded-[3.5rem] p-8 md:p-12 shadow-2xl">
-              <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-widest text-[#25D366] block mb-1">18. Meta Business Agent</span>
-                  <h4 className="text-3xl md:text-4xl font-black text-white">Atención con Información Real del Negocio</h4>
-                </div>
-                <a href="https://faq.whatsapp.com/1153795669452207/?cms_platform=web" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#25D366] underline">Disponibilidad Oficial WhatsApp</a>
-              </div>
-              <p className="text-sm text-slate-300 mb-6">
-                Antes de configurarlo, preparar 10 puntos: Oferta, Precios, Productos, Horarios, Cobertura, Condiciones de entrega, Forma de confirmar disponibilidad, Procedimiento de pago, Preguntas frecuentes y Casos que debe derivar.
+            <!-- Cierre de Impacto para el Emprendedor -->
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#0f172a] rounded-[3.5rem] p-10 md:p-16 border-2 border-[#00aeef]/50 shadow-[0_0_80px_rgba(0,174,239,0.25)] text-center">
+              <h4 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
+                “Una pregunta de tu cliente se convierte en contenido.<br/>
+                <span className="text-[#00aeef]">Ese contenido inicia una conversación en WhatsApp.</span><br/>
+                <span className="text-[#f59e0b]">Y una buena atención la convierte en venta.”</span>
+              </h4>
+              <p className="text-xl text-slate-300 font-bold mt-4">
+                Hugo López — El Marketero del Pueblo · @hugolopez.pe
               </p>
-
-              <div className="grid lg:grid-cols-12 gap-8">
-                <div className="lg:col-span-8 prompt-box relative">
-                  <${CopyButton} text=${baseAgente} />
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#25D366] block mb-2">Base de Conocimientos Copiable para el Agente (Caso Viste Bonito)</span>
-                  <pre className="text-xs sm:text-sm text-emerald-100 whitespace-pre-wrap font-mono leading-relaxed pr-20">${baseAgente}</pre>
-                </div>
-                <div className="lg:col-span-4 bg-[#16161a] border border-slate-800 p-6 rounded-3xl flex flex-col justify-between">
-                  <div>
-                    <h5 className="text-xl font-black text-[#f59e0b] mb-4">6 Pruebas para la Demostración en Vivo</h5>
-                    <ul className="space-y-2.5 text-sm text-white font-medium">
-                      <li className="bg-slate-900 p-3 rounded-xl border border-slate-800">1. “¿Cuánto cuesta la blusa Alba?”</li>
-                      <li className="bg-slate-900 p-3 rounded-xl border border-slate-800">2. “¿Tienes una talla que no figura?”</li>
-                      <li className="bg-slate-900 p-3 rounded-xl border border-slate-800">3. “¿Puedes entregarla hoy?”</li>
-                      <li className="bg-slate-900 p-3 rounded-xl border border-slate-800">4. “Ya pagué, ¿confirmas?”</li>
-                      <li className="bg-slate-900 p-3 rounded-xl border border-slate-800">5. “Quiero hablar con una persona.”</li>
-                      <li className="bg-slate-900 p-3 rounded-xl border border-slate-800">6. “¿Me haces un descuento que no está anunciado?”</li>
-                    </ul>
-                  </div>
-                  <p className="text-xs text-emerald-300 mt-4 font-bold">Evaluar si responde con datos conocidos y deriva las excepciones a una persona.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 19, 20, 21 Y 22: DEL PEDIDO AL PAGO, MARGEN Y PUBLICIDAD
-       ========================================================================= */
-    const PedidoPagosMargenYPublicidad = () => {
-      const resumenPedido = `RESUMEN DE PEDIDO (VISTE BONITO):
-• Producto: Blusa Alba (ALBA-01)
-• Cantidad: 1 unidad
-• Variante: Mediana (confirmada con el cliente)
-• Precio del producto: S/49
-• Envío acordado (Surquillo): S/8
-• TOTAL A PAGAR: S/57
-• Entrega: Fecha y franja acordadas.`;
-
-      return html`
-        <section id="margen" className="bg-[#111827] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <!-- SECCIONES 19 Y 20 -->
-            <div className="grid lg:grid-cols-12 gap-10 mb-16">
-              <div className="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl">
-                <h4 className="text-2xl md:text-3xl font-black text-[#00aeef] mb-4">19. De la Consulta al Pedido</h4>
-                <div className="space-y-2.5 text-sm mb-6 bg-black/40 p-5 rounded-3xl border border-slate-800">
-                  <p><strong className="text-slate-400">Cliente:</strong> ¿Precio?</p>
-                  <p><strong className="text-[#25D366]">Negocio:</strong> La blusa Alba cuesta S/49. ¿Qué talla o medidas estás buscando?</p>
-                  <p><strong className="text-slate-400">Cliente:</strong> Mediana.</p>
-                  <p><strong className="text-[#25D366]">Negocio:</strong> Te comparto las medidas del modelo para compararlas. ¿En qué distrito recibirías el pedido?</p>
-                  <p><strong className="text-slate-400">Cliente:</strong> Surquillo.</p>
-                  <p><strong className="text-[#25D366]">Negocio:</strong> Revisaré la disponibilidad y la entrega para indicarte el total antes de confirmar.</p>
-                </div>
-                <div className="prompt-box relative mb-4">
-                  <${CopyButton} text=${resumenPedido} />
-                  <pre className="text-xs sm:text-sm text-emerald-100 whitespace-pre-wrap font-mono pr-20">${resumenPedido}</pre>
-                </div>
-                <p className="text-xs text-slate-300">
-                  <strong className="text-[#f59e0b]">Regla de oro:</strong> Confirmar por escrito el importe y las condiciones antes de solicitar el pago. (En servicios: alcance, fecha, duración estimada y condiciones de reserva).
-                </p>
-              </div>
-
-              <div className="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-black text-[#f59e0b] mb-4">20. Pagos, Entregas y Registro Inicial</h4>
-                  <div className="grid sm:grid-cols-2 gap-4 text-xs text-slate-200 mb-6">
-                    <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800">
-                      <strong className="text-white block mb-1">Pago (Verificación real):</strong>
-                      Explicar importe, medio aceptado, titular correspondiente, momento de verificación y qué sucede después. <strong className="text-rose-400">Verificar el abono desde el propio medio de cobro antes de marcar como pagado.</strong>
-                    </div>
-                    <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800">
-                      <strong className="text-white block mb-1">Entrega:</strong>
-                      Definir cobertura, costo, plazo, datos necesarios, responsable y procedimiento si ocurre una dificultad.
-                    </div>
-                  </div>
-                  <div className="overflow-x-auto mb-6">
-                    <table className="w-full text-left border-collapse text-xs">
-                      <thead>
-                        <tr className="border-b border-slate-700 text-[#00aeef] uppercase">
-                          <th className="py-2 px-2">Pedido</th>
-                          <th className="py-2 px-2">Producto</th>
-                          <th className="py-2 px-2">Importe</th>
-                          <th className="py-2 px-2">Pago</th>
-                          <th className="py-2 px-2">Entrega</th>
-                          <th className="py-2 px-2">Estado</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-800 text-slate-200">
-                        <tr><td className="py-2 px-2 font-bold">001</td><td className="py-2 px-2">Blusa Alba</td><td className="py-2 px-2">S/57</td><td className="py-2 px-2 text-emerald-400 font-bold">Verificado</td><td className="py-2 px-2">Fecha acordada</td><td className="py-2 px-2">En preparación</td></tr>
-                        <tr><td className="py-2 px-2 font-bold">002</td><td className="py-2 px-2">Cotización torta</td><td className="py-2 px-2">Por confirmar</td><td className="py-2 px-2 text-amber-400">Pendiente</td><td className="py-2 px-2">Por acordar</td><td className="py-2 px-2">Falta información</td></tr>
-                        <tr><td className="py-2 px-2 font-bold">003</td><td className="py-2 px-2">Limpieza sofá</td><td className="py-2 px-2">Cotizado</td><td className="py-2 px-2 text-amber-400">Pendiente</td><td className="py-2 px-2">Cita por confirmar</td><td className="py-2 px-2">Seguimiento</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="bg-amber-950/40 border border-[#f59e0b]/40 p-4 rounded-2xl text-center">
-                  <strong className="text-[#f59e0b] text-xs uppercase block">Pregunta al público:</strong>
-                  <p className="text-base font-black text-white">“Si hoy recibieras diez pedidos, ¿sabrías cuáles están pagados y cuáles faltan entregar?”</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- SECCIONES 21 Y 22: VENDER CON MARGEN Y PUBLICIDAD -->
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-6 bg-slate-900 border-2 border-emerald-500/40 rounded-[3.5rem] p-8 md:p-10 shadow-2xl">
-                <h4 className="text-2xl md:text-3xl font-black text-emerald-400 mb-4">21. Vender con Margen (Caso Blusa S/49)</h4>
-                <div className="overflow-x-auto mb-5">
-                  <table className="w-full text-left border-collapse text-sm">
-                    <thead>
-                      <tr className="border-b border-slate-700 text-emerald-400 uppercase text-xs">
-                        <th className="py-2 px-3">Concepto</th>
-                        <th className="py-2 px-3 text-right">Importe</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800 text-slate-200">
-                      <tr><td className="py-2 px-3 font-bold text-white">Precio de venta de la blusa</td><td className="py-2 px-3 text-right font-black text-white">S/49</td></tr>
-                      <tr><td className="py-2 px-3">Costo del producto</td><td className="py-2 px-3 text-right">S/25</td></tr>
-                      <tr><td className="py-2 px-3">Empaque</td><td className="py-2 px-3 text-right">S/2</td></tr>
-                      <tr><td className="py-2 px-3">Comisiones u otros costos variables</td><td className="py-2 px-3 text-right">S/1</td></tr>
-                      <tr><td className="py-2 px-3">Costo publicitario atribuido por pedido</td><td className="py-2 px-3 text-right">S/6</td></tr>
-                      <tr className="bg-slate-800/60"><td className="py-2 px-3 font-bold text-rose-300">Total de esos costos</td><td className="py-2 px-3 text-right font-bold text-rose-300">S/34</td></tr>
-                      <tr className="bg-emerald-950/50"><td className="py-2.5 px-3 font-black text-emerald-400">Saldo antes de otros gastos e impuestos</td><td className="py-2.5 px-3 text-right font-black text-emerald-400 text-lg">S/15</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="bg-rose-950/30 border border-rose-500/40 p-4 rounded-2xl text-xs text-rose-100 mb-4">
-                  <strong className="text-rose-400 block mb-1">Cuidado con los descuentos sin cálculo:</strong>
-                  Si se descuentan S/10 manteniendo los mismos costos, el saldo del ejemplo baja de <strong className="text-white">S/15 a solo S/5</strong> (y aún debe cubrir gastos fijos e impuestos).
-                </div>
-                <p className="text-xs text-slate-300">
-                  <strong className="text-white">Promociones saludables:</strong> Paquetes que dejen margen · Productos complementarios · Beneficios por monto de compra · Ofertas por disponibilidad real · Incentivos de recompra sostenibles.
-                </p>
-              </div>
-
-              <div className="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-black text-white mb-3">22. Contenido Orgánico y Publicidad</h4>
-                  <p className="text-sm text-slate-300 mb-4">
-                    El contenido orgánico ayuda a descubrir preguntas y probar mensajes. La publicidad distribuye una propuesta con presupuesto y objetivo. <strong className="text-[#f59e0b]">Un buen alcance orgánico es señal para investigar, no garantiza ventas al anunciarlo.</strong>
-                  </p>
-                  <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800 text-xs text-slate-200 mb-4">
-                    <strong className="text-[#00aeef] block mb-1">6 Comprobaciones antes de invertir en anuncios:</strong>
-                    1. Oferta clara · 2. Precio y margen · 3. Capacidad de atención · 4. Disponibilidad · 5. Entrega · 6. Registro de resultados.
-                  </div>
-                  <div className="grid sm:grid-cols-3 gap-3 text-xs mb-4">
-                    <div className="bg-black/40 p-3.5 rounded-2xl border border-slate-800"><strong className="text-[#00aeef] block mb-1">Ángulo 1: Elección</strong>“¿Dudas con tu talla? Revisa las medidas antes de elegir.”</div>
-                    <div className="bg-black/40 p-3.5 rounded-2xl border border-slate-800"><strong className="text-[#f59e0b] block mb-1">Ángulo 2: Uso</strong>“Una blusa, distintas combinaciones para tu semana.”</div>
-                    <div className="bg-black/40 p-3.5 rounded-2xl border border-slate-800"><strong className="text-emerald-400 block mb-1">Ángulo 3: Oferta</strong>“Conoce el modelo Alba y consulta colores disponibles.”</div>
-                  </div>
-                </div>
-                <div className="bg-blue-950/40 border border-[#00aeef]/40 p-4 rounded-2xl text-xs text-slate-200">
-                  <strong className="text-white block mb-1">Medición sencilla de campañas (4 datos):</strong>
-                  Cuánto se invirtió · Cuántas consultas pertinentes llegaron · Cuántos pedidos pagados se consiguieron · Cuánto margen dejaron.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 23, 24, 25, 26 Y 27: GOOGLE BUSINESS, POSVENTA, WINDSOR.AI Y CASO REAL HUGO
-       ========================================================================= */
-    const ReputacionPosventaYAnalitica = () => {
-      const promptWindsor1 = `Confirma qué cuenta de TikTok está conectada y la fecha más reciente disponible. Analiza los últimos cuatro videos publicados. Para cada uno, muestra fecha, duración, visualizaciones, interacciones y métricas de retención disponibles. Indica datos faltantes. Considera que tienen distinta antigüedad y separa hechos de hipótesis.`;
-      const promptWindsor2 = `Compara los videos disponibles y explica cuáles muestran mejores señales de interés. Usa retención, guardados, compartidos y visitas o acciones disponibles. Propón tres temas para probar. No atribuyas ventas si no tienes esos datos.`;
-      const promptWindsor3 = `Agrupa las preguntas disponibles en los comentarios por tema. Identifica dudas frecuentes y propone contenidos que las respondan. Indica de qué periodo y conjunto de comentarios proviene el análisis.`;
-      const promptWindsor4 = `Con el registro de consultas y pedidos que adjunto, calcula cuántas consultas terminaron en pedidos pagados y cuánto margen de contribución dejaron según los costos proporcionados. Señala registros incompletos y no inventes atribución a publicaciones.`;
-      const preguntaHugoIA = `¿Qué hipótesis podemos probar sobre el interés de mi audiencia a partir de estos resultados y qué información falta para confirmarlas?`;
-
-      return html`
-        <section id="analitica" className="bg-[#0a0a0a] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <!-- SECCIONES 23 Y 24 -->
-            <div className="grid lg:grid-cols-2 gap-10 mb-16">
-              <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl">
-                <div className="flex justify-between items-center mb-3">
-                  <h4 className="text-2xl font-black text-[#00aeef]">23. Google Business Profile y Reputación</h4>
-                  <a href="https://support.google.com/business/answer/13763036?hl=es" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#00aeef] underline">Reglas de Elegibilidad Google</a>
-                </div>
-                <p className="text-xs text-slate-300 mb-4">
-                  Exige atención presencial (excluye negocios solo en Internet). Mostrar: Categoría adecuada, contacto, horarios, ubicación/área, fotos reales, productos y reseñas. <strong className="text-rose-400">No usar imágenes con IA como evidencia de locales o trabajos reales.</strong>
-                </p>
-                <div className="space-y-3">
-                  <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800 relative pr-24">
-                    <${CopyButton} text="Gracias por tu compra. Si deseas compartir cómo fue tu experiencia, puedes dejar una reseña en nuestro perfil. Nos ayuda a mejorar y a que otras personas conozcan nuestro trabajo." />
-                    <strong className="text-xs text-[#f59e0b] uppercase block mb-1">Solicitar una opinión:</strong>
-                    <p className="text-xs text-slate-200">“Gracias por tu compra. Si deseas compartir cómo fue tu experiencia, puedes dejar una reseña en nuestro perfil. Nos ayuda a mejorar y a que otras personas conozcan nuestro trabajo.”</p>
-                  </div>
-                  <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800 relative pr-24">
-                    <${CopyButton} text="Gracias por contarnos lo ocurrido. Queremos revisar tu caso. Escríbenos por nuestro canal de atención para identificar el pedido y ayudarte." />
-                    <strong className="text-xs text-rose-400 uppercase block mb-1">Responder una dificultad:</strong>
-                    <p className="text-xs text-slate-200">“Gracias por contarnos lo ocurrido. Queremos revisar tu caso. Escríbenos por nuestro canal de atención para identificar el pedido y ayudarte.”</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-10 shadow-2xl">
-                <h4 className="text-2xl font-black text-emerald-400 mb-2">24. Posventa y Recompra</h4>
-                <p className="text-xs text-slate-300 mb-4">“La experiencia después del pago también construye la marca.” Plantillas listas para después de entregar:</p>
-                <div className="grid sm:grid-cols-2 gap-3 text-xs">
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-emerald-400 block mb-1">1. Confirmación</strong>“Hola, queremos confirmar que recibiste tu pedido y saber si todo llegó conforme.”</div>
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-[#00aeef] block mb-1">2. Ayuda</strong>“Si necesitas orientación sobre el cuidado de la prenda, con gusto te ayudamos.”</div>
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-[#f59e0b] block mb-1">3. Opinión</strong>“Si deseas compartir tu experiencia, nos será útil conocerla.”</div>
-                  <div className="bg-[#16161a] p-3.5 rounded-2xl border border-slate-800"><strong className="text-purple-400 block mb-1">4. Nueva compra (con permiso)</strong>“Nos comentaste que buscabas otro color. Si quieres, podemos avisarte cuando tengamos una opción disponible.”</div>
-                </div>
-                <p className="text-xs text-slate-400 mt-4">Adaptaciones: Repostería (confirmar recepción) · Limpieza (cuidados posteriores) · Servicios personales (ofrecer siguiente mantenimiento).</p>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 25: WINDSOR.AI + 4 PROMPTS -->
-            <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-12 mb-16 shadow-2xl">
-              <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-                <div>
-                  <h4 className="text-2xl md:text-4xl font-black text-white">25. Analítica con IA y Windsor.ai</h4>
-                  <p className="text-sm text-slate-300 mt-1">Secuencia: 1) Mostrar cuenta conectada → 2) Definir fechas → 3) Consultar métricas → 4) Revisar interpretación → 5) Elegir acción.</p>
-                </div>
-                <a href="https://windsor.ai/how-to-connect-tiktok-organic-to-gemini/" target="_blank" rel="noreferrer" className="text-xs font-bold text-[#00aeef] underline">Documentación Windsor.ai + Gemini</a>
-              </div>
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${promptWindsor1} />
-                  <span className="text-xs font-bold uppercase text-[#00aeef] block mb-1">1. Prompt Inicial de Diagnóstico</span>
-                  <p className="text-xs text-emerald-100 pr-20">${promptWindsor1}</p>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${promptWindsor2} />
-                  <span className="text-xs font-bold uppercase text-[#f59e0b] block mb-1">2. Prompt para Decidir Contenido</span>
-                  <p className="text-xs text-emerald-100 pr-20">${promptWindsor2}</p>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${promptWindsor3} />
-                  <span className="text-xs font-bold uppercase text-purple-400 block mb-1">3. Prompt para Analizar Comentarios</span>
-                  <p className="text-xs text-emerald-100 pr-20">${promptWindsor3}</p>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${promptWindsor4} />
-                  <span className="text-xs font-bold uppercase text-emerald-400 block mb-1">4. Prompt para Revisar Comercio y Margen</span>
-                  <p className="text-xs text-emerald-100 pr-20">${promptWindsor4}</p>
-                </div>
-              </div>
-              <p className="text-xs text-slate-400">Si no tienen conector: usar TikTok Studio, Analítica de LIVE, exportaciones, capturas legibles y registro propio (retirando datos personales innecesarios).</p>
-            </div>
-
-            <!-- SECCIONES 26 Y 27: MÉTRICAS DEL EMPRENDEDOR Y CASO REAL DE HUGO -->
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-6 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 shadow-2xl">
-                <h4 className="text-2xl font-black text-[#00aeef] mb-4">26. Qué Métricas Mirar (7 Indicadores)</h4>
-                <div className="overflow-x-auto mb-4">
-                  <table className="w-full text-left border-collapse text-xs">
-                    <thead>
-                      <tr className="border-b border-slate-700 text-[#00aeef] uppercase">
-                        <th className="py-2 px-2">Etapa</th>
-                        <th className="py-2 px-2">Indicador</th>
-                        <th className="py-2 px-2">Qué evalúa</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800 text-slate-200">
-                      <tr><td className="py-2 px-2">Contenido</td><td className="py-2 px-2 font-bold">Visualizaciones</td><td className="py-2 px-2">Distribución.</td></tr>
-                      <tr><td className="py-2 px-2">Contenido</td><td className="py-2 px-2 font-bold">Retención</td><td className="py-2 px-2">Si sostienes la atención.</td></tr>
-                      <tr><td className="py-2 px-2">Interés</td><td className="py-2 px-2 font-bold">Guardados y compartidos</td><td className="py-2 px-2">Utilidad o relevancia percibida.</td></tr>
-                      <tr><td className="py-2 px-2">Intención</td><td className="py-2 px-2 font-bold">Visitas, clics o consultas</td><td className="py-2 px-2">Acercamiento al negocio.</td></tr>
-                      <tr><td className="py-2 px-2">Venta</td><td className="py-2 px-2 font-bold text-emerald-400">Pedidos pagados</td><td className="py-2 px-2">Conversión comercial.</td></tr>
-                      <tr><td className="py-2 px-2">Economía</td><td className="py-2 px-2 font-bold text-[#f59e0b]">Margen por pedido</td><td className="py-2 px-2">Sostenibilidad.</td></tr>
-                      <tr><td className="py-2 px-2">Experiencia</td><td className="py-2 px-2 font-bold">Incidencias y recompra</td><td className="py-2 px-2">Calidad de atención y continuidad.</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-xs text-slate-200 mb-3">
-                  <strong className="text-emerald-400 block">Ejemplo de conversión:</strong> 10.000 vistas → 40 consultas identificadas → 8 pedidos pagados = <strong className="text-white">8 ÷ 40 × 100 = 20%</strong>. (Registrar cómo llegó cada consulta para conocer el origen).
-                </div>
-                <div className="text-xs text-slate-300 space-y-1">
-                  <p>• <strong>Muchas vistas y pocas consultas:</strong> revisar pertinencia del público, oferta, perfil y siguiente paso.</p>
-                  <p>• <strong>Muchas consultas y pocas compras:</strong> revisar dudas, precio, disponibilidad y proceso.</p>
-                  <p>• <strong>Ventas sin margen / con reclamos:</strong> revisar costos, promesa, producto y entrega.</p>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6 bg-slate-900 border-2 border-[#f59e0b]/40 rounded-[3.5rem] p-8 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <span className="text-xs font-black uppercase tracking-widest text-[#f59e0b] block mb-1">27. Caso Real de Hugo López (Consulta histórica: 21 de octubre)</span>
-                  <h4 className="text-2xl font-black text-white mb-4">Comparativa de 4 Videos Reales</h4>
-                  <div className="overflow-x-auto mb-5">
-                    <table className="w-full text-left border-collapse text-sm">
-                      <thead>
-                        <tr className="border-b border-slate-700 text-[#f59e0b] uppercase text-xs">
-                          <th className="py-2.5 px-3">Tema del video</th>
-                          <th className="py-2.5 px-3 text-right">Vistas registradas</th>
-                          <th className="py-2.5 px-3 text-right">Nuevos seguidores</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-800 text-slate-200">
-                        <tr><td className="py-2.5 px-3 font-bold">Verificación con RUC</td><td className="py-2.5 px-3 text-right">4.113</td><td className="py-2.5 px-3 text-right">7</td></tr>
-                        <tr className="bg-emerald-950/30"><td className="py-2.5 px-3 font-black text-emerald-400">TikTok Shop en Perú</td><td className="py-2.5 px-3 text-right font-black text-white">14.739</td><td className="py-2.5 px-3 text-right font-black text-emerald-400">57</td></tr>
-                        <tr><td className="py-2.5 px-3 font-bold">Rankings de IA</td><td className="py-2.5 px-3 text-right">2.108</td><td className="py-2.5 px-3 text-right">2</td></tr>
-                        <tr className="bg-blue-950/30"><td className="py-2.5 px-3 font-black text-[#00aeef]">Avatar de Google Flow</td><td className="py-2.5 px-3 text-right font-black text-white">8.059</td><td className="py-2.5 px-3 text-right font-black text-[#00aeef]">32</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <p className="text-xs text-slate-300 mb-4">
-                    <strong className="text-white">Interpretación:</strong> El video sobre TikTok Shop mostró mayor alcance y captación de seguidores; el del avatar de Flow mostró una interacción proporcional destacada. Un contenido puede destacar por alcance y otro por profundidad de interés.
-                  </p>
-                </div>
-                <div className="prompt-box relative">
-                  <${CopyButton} text=${preguntaHugoIA} />
-                  <span className="text-xs font-bold uppercase text-[#f59e0b] block mb-1">Pregunta Copiable para la IA</span>
-                  <p className="text-xs text-emerald-100 pr-20">${preguntaHugoIA}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 28, 29, 30 Y 31: CASO EN 10 PASOS, SERVICIOS, PLAN 7 DÍAS Y DIRECTORIO
-       ========================================================================= */
-    const RecorridoIntegradoYPlan7Dias = () => {
-      const diezPasos = [
-        { p: "Paso 1. Detectar una duda", d: "La tienda observa que muchas consultas se refieren a tallas." },
-        { p: "Paso 2. Organizar la respuesta", d: "Con la skill prepara: video, carrusel, respuesta rápida y FAQs para el agente." },
-        { p: "Paso 3. Producir", d: "Fotografía del producto, imagen de catálogo, carrusel de medidas y video breve." },
-        { p: "Paso 4. Publicar", d: "La pieza invita a consultar el modelo y las medidas." },
-        { p: "Paso 5. Atender", d: "La clienta escribe y recibe la información necesaria para elegir." },
-        { p: "Paso 6. Confirmar", d: "El negocio verifica variante, disponibilidad, entrega y total." },
-        { p: "Paso 7. Cobrar", d: "Se verifica el abono y se registra el pedido." },
-        { p: "Paso 8. Entregar", d: "Se prepara y coordina según lo acordado." },
-        { p: "Paso 9. Dar seguimiento", d: "Se confirma recepción y se atienden dudas." },
-        { p: "Paso 10. Medir", d: "Se revisan consultas, pedidos pagados, dudas repetidas, margen, incidencias y recompras." }
-      ];
-
-      const plan7Dias = [
-        { d: "Día 1", a: "Elegir una oferta y completar la ficha del negocio.", r: "Información clara." },
-        { d: "Día 2", a: "Revisar preguntas y búsquedas.", r: "Tres temas prioritarios." },
-        { d: "Día 3", a: "Preparar catálogo y respuestas.", r: "Atención más ordenada." },
-        { d: "Día 4", a: "Crear una pieza útil con IA.", r: "Contenido listo." },
-        { d: "Día 5", a: "Publicar y responder consultas.", r: "Primeras observaciones." },
-        { d: "Día 6", a: "Realizar una demostración o LIVE si está habilitado.", r: "Conversación con posibles clientes." },
-        { d: "Día 7", a: "Revisar consultas, pedidos y dificultades.", r: "Una mejora para la siguiente semana." }
-      ];
-
-      const directorio = [
-        { n: "Ordenar el negocio", h: "ChatGPT, Claude o Gemini con contexto y skill", u: "Diagnóstico." },
-        { n: "Investigar búsquedas en TikTok", h: "Creator Search Insights", u: "Elegir una pregunta." },
-        { n: "Analizar descubrimiento en Google", h: "Search Console configurado", u: "Revisar consultas." },
-        { n: "Crear imágenes", h: "Nano Banana en Flow", u: "Presentar un producto real." },
-        { n: "Crear flyers", h: "Nano Banana y skill de diseño", u: "Comunicar una oferta." },
-        { n: "Crear carruseles", h: "Skill de contenido y generación de tarjetas", u: "Explicar por pasos." },
-        { n: "Crear videos", h: "Omni Flash 1.1 en Flow", u: "Demostrar o responder." },
-        { n: "Atender", h: "WhatsApp Business", u: "Catálogo y respuestas." },
-        { n: "Apoyar conversaciones con IA", h: "Meta Business Agent, si está disponible", u: "Preguntas frecuentes." },
-        { n: "Reputación local", h: "Google Business Profile, si es apto", u: "Información y reseñas." },
-        { n: "Analizar datos conectados", h: "Windsor.ai con integración compatible", u: "Comparar resultados." },
-        { n: "Controlar pedidos", h: "Hoja de cálculo o registro", u: "Pago, entrega y estado." }
-      ];
-
-      return html`
-        <section id="casos" className="bg-[#111827] border-t border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <!-- SECCIÓN 28: CASO COMPLETO EN 10 PASOS -->
-            <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-12 mb-16 shadow-2xl">
-              <h3 className="text-3xl md:text-4xl font-black text-white text-center mb-8">28. Caso Completo: Del Contenido al Pedido (10 Pasos)</h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-                ${diezPasos.map((item, i) => html`
-                  <div key=${i} className="bg-[#16161a] border border-slate-800 p-4 rounded-2xl">
-                    <strong className="text-[#00aeef] text-sm block mb-1">${item.p}</strong>
-                    <p className="text-xs text-slate-300 leading-relaxed">${item.d}</p>
-                  </div>
-                `)}
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4 text-sm text-center">
-                <div className="bg-purple-950/30 border border-purple-500/40 p-4 rounded-2xl"><strong className="text-purple-400">Qué hizo la IA:</strong> Ayudó a organizar, redactar, producir y analizar.</div>
-                <div className="bg-emerald-950/30 border border-emerald-500/40 p-4 rounded-2xl"><strong className="text-emerald-400">Qué hizo el emprendedor:</strong> Confirmó los datos, tomó decisiones y cumplió la oferta.</div>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 29 Y 30: SERVICIOS Y PLAN DE 7 DÍAS -->
-            <div className="grid lg:grid-cols-12 gap-10 mb-16">
-              <div className="lg:col-span-5 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 shadow-2xl">
-                <h4 className="text-2xl font-black text-emerald-400 mb-4">29. Adaptación Completa a Servicios (Limpieza de Muebles)</h4>
-                <ul className="space-y-2 text-xs text-slate-200 mb-4">
-                  <li>• <strong>Descubrimiento:</strong> Video sobre qué información enviar para cotizar.</li>
-                  <li>• <strong>Contenido:</strong> Explicación del alcance y preparación del espacio.</li>
-                  <li>• <strong>Consulta:</strong> Foto del mueble y distrito.</li>
-                  <li>• <strong>Evaluación:</strong> Revisión del material, estado y posibilidades reales.</li>
-                  <li>• <strong>Cotización y Reserva:</strong> Precio, alcance, fecha y procedimiento acordado.</li>
-                  <li>• <strong>Atención y Seguimiento:</strong> Ejecución del trabajo, cuidados y consulta posterior.</li>
-                  <li>• <strong>Medición:</strong> Consultas, reservas, atenciones, margen y repetición.</li>
-                </ul>
-                <div className="bg-black/40 p-4 rounded-2xl border border-slate-800 text-xs text-slate-300">
-                  <strong className="text-emerald-400 block mb-1">IA aplicada en servicios:</strong>
-                  Preparar preguntas de diagnóstico, organizar explicaciones, crear material educativo, redactar cotizaciones, resumir consultas y analizar resultados. (Mostrar evidencia real para trabajos realizados).
-                </div>
-              </div>
-
-              <div className="lg:col-span-7 bg-slate-900 border border-[#f59e0b]/40 rounded-[3.5rem] p-8 shadow-2xl">
-                <h4 className="text-2xl font-black text-[#f59e0b] mb-4">30. Plan de Aplicación de Siete Días</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse text-xs sm:text-sm">
-                    <thead>
-                      <tr className="border-b border-slate-700 text-[#f59e0b] uppercase text-xs">
-                        <th className="py-2 px-3">Día</th>
-                        <th className="py-2 px-3">Acción</th>
-                        <th className="py-2 px-3">Resultado</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800 text-slate-200">
-                      ${plan7Dias.map((r, i) => html`
-                        <tr key=${i}>
-                          <td className="py-2.5 px-3 font-black text-[#00aeef]">${r.d}</td>
-                          <td className="py-2.5 px-3">${r.a}</td>
-                          <td className="py-2.5 px-3 font-bold text-emerald-400">${r.r}</td>
-                        </tr>
-                      `)}
-                    </tbody>
-                  </table>
-                </div>
-                <p className="text-xs text-slate-400 mt-3">No es necesario dominar todas las herramientas para comenzar.</p>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 31: DIRECTORIO POR NECESIDAD -->
-            <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-12 shadow-2xl">
-              <h4 className="text-2xl md:text-3xl font-black text-white text-center mb-6">31. Directorio de Herramientas por Necesidad</h4>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                ${directorio.map((d, i) => html`
-                  <div key=${i} className="bg-[#16161a] border border-slate-800 p-4 rounded-2xl flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs font-black uppercase text-[#00aeef] block">${d.n}</span>
-                      <strong className="text-base text-white block mt-1">${d.h}</strong>
-                    </div>
-                    <span className="text-xs text-[#f59e0b] font-bold mt-2 block">Primer uso: ${d.u}</span>
-                  </div>
-                `)}
-              </div>
-            </div>
-          </div>
-        </section>
-      `;
-    };
-
-    /* =========================================================================
-       SECCIONES 32, 33, 34, 35 Y 36: REGALO DE SKILLS, GUION DE CIERRE, AGENDA, FAQS Y PREPARACIÓN
-       ========================================================================= */
-    const RegaloCierreYPreparacion = () => {
-      const faqs = [
-        { q: "1. ¿Necesito pagar todas las herramientas?", a: "Puedes comenzar con funciones gratuitas disponibles y sumar herramientas según necesidad. Hay límites y diferencias por cuenta, plan y región." },
-        { q: "2. ¿La IA puede hacer todo mi contenido?", a: "Puede apoyar una parte importante. Tu negocio aporta el conocimiento real, los procesos, las características y la relación con el cliente." },
-        { q: "3. ¿Necesito mostrar mi rostro?", a: "Puedes trabajar con producto, manos, procesos, narración o avatar. Elige según el mensaje y los recursos." },
-        { q: "4. ¿El avatar reemplaza un testimonio?", a: "Un avatar puede presentar información. Un testimonio debe corresponder a una experiencia real." },
-        { q: "5. ¿Necesito una web para comenzar?", a: "Puedes iniciar una ruta de consultas y pedidos con los canales que tienes. Una web puede incorporarse cuando aporte al negocio." },
-        { q: "6. ¿Si tengo pocas visualizaciones, el contenido fracasó?", a: "Hay que revisar a quién llegó y qué ocurrió después. Una pieza puede producir pocas vistas y consultas pertinentes." },
-        { q: "7. ¿Si tengo muchas vistas, debo invertir en publicidad?", a: "Revisa oferta, margen, atención y señales de intención. El alcance es una señal para evaluar." },
-        { q: "8. ¿El agente puede confirmar stock y pagos?", a: "Solo debería hacerlo si cuenta con información fiable y un mecanismo que lo permita. En el ejemplo básico, esas confirmaciones pasan a una persona." },
-        { q: "9. ¿Qué hago si todavía no tengo testimonios?", a: "Muestra tu proceso, responde preguntas y documenta las primeras experiencias reales con autorización." },
-        { q: "10. ¿Por dónde comienzo mañana?", a: "Por una oferta clara, un catálogo útil y una pregunta del cliente que puedas responder bien." }
-      ];
-
-      return html`
-        <section id="regalo" className="bg-[#0f172a] border-t-2 border-slate-800 slide-container">
-          <div className="container mx-auto px-6 max-w-[1600px]">
-            <!-- SECCIÓN 32: REGALO DE SKILLS -->
-            <div className="bg-gradient-to-br from-[#f59e0b] to-[#d97706] text-slate-950 rounded-[3.5rem] p-8 md:p-14 mb-16 shadow-[0_0_80px_rgba(245,158,11,0.3)] border-4 border-yellow-300">
-              <div className="grid lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-7">
-                  <span className="bg-slate-950 text-[#f59e0b] text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest inline-block mb-4">32. Regalo de Skills para la Audiencia</span>
-                  <h3 className="text-3xl md:text-5xl font-black mb-4">Descarga el Paquete de Skills de IA</h3>
-                  <div className="bg-white/95 p-6 rounded-3xl shadow-xl text-base md:text-lg font-medium leading-relaxed space-y-2 mb-4">
-                    <p>“Les he preparado recursos para continuar después de esta conferencia: estrategia digital, contenidos, publicidad y producción de imágenes y videos.</p>
-                    <p>Los podrán descargar desde el enlace de mi perfil de TikTok: <strong>hugolopez.pe, El Marketero del Pueblo</strong>.</p>
-                    <p>El acceso estará disponible hoy, <strong>jueves 22 de octubre, hasta las seis de la tarde, hora de Perú</strong>.</p>
-                    <p>Empiecen por la ficha de su negocio y por la skill que resuelva su necesidad más urgente”.</p>
-                  </div>
-                  <p className="text-xs font-bold">Preparación del expositor: Comprobar enlace · Probar descarga desde el celular · Incluir instrucciones breves por plataforma · Identificar versión y finalidad de cada skill · Verificar cierre a las 6:00 p. m.</p>
-                </div>
-                <div className="lg:col-span-5 bg-slate-950 text-white p-8 rounded-[3rem] text-center border-2 border-white/20 shadow-2xl">
-                  <${Gift} className="w-16 h-16 text-[#f59e0b] mx-auto mb-4"/>
-                  <span className="text-xs font-black uppercase tracking-widest text-[#00aeef] block mb-2">Para mostrar en pantalla</span>
-                  <h4 className="text-2xl font-black text-white mb-2">Recursos para emprendedores</h4>
-                  <p className="text-3xl font-black text-[#f59e0b] mb-1">TikTok: @hugolopez.pe</p>
-                  <p className="text-lg font-bold text-[#00aeef] mb-4">El Marketero del Pueblo</p>
-                  <div className="bg-rose-500/20 border border-rose-400/40 p-3 rounded-2xl text-xs font-bold text-rose-200">
-                    Disponibles hasta el 22 de octubre de 2026, 6:00 p. m., hora de Perú.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 34 Y 36: DISTRIBUCIÓN DE TIEMPO Y PREPARACIÓN FINAL -->
-            <div className="grid lg:grid-cols-12 gap-10 mb-16">
-              <div className="lg:col-span-5 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 shadow-2xl">
-                <h4 className="text-2xl font-black text-[#00aeef] mb-4">34. Distribución Sugerida (90 y 60 Minutos)</h4>
-                <table className="w-full text-left border-collapse text-xs mb-4">
-                  <thead>
-                    <tr className="border-b border-slate-700 text-[#00aeef] uppercase">
-                      <th className="py-2 px-2">Bloque</th>
-                      <th className="py-2 px-2 text-right">Minutos</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-800 text-slate-200">
-                    <tr><td className="py-2 px-2">Apertura, oferta y recorrido comercial</td><td className="py-2 px-2 text-right font-bold">10 min</td></tr>
-                    <tr><td className="py-2 px-2">Investigación y pilares</td><td className="py-2 px-2 text-right font-bold">10 min</td></tr>
-                    <tr><td className="py-2 px-2">Skills y demostración</td><td className="py-2 px-2 text-right font-bold">10 min</td></tr>
-                    <tr><td className="py-2 px-2">Flow: imágenes, carrusel y video</td><td className="py-2 px-2 text-right font-bold text-[#f59e0b]">20 min</td></tr>
-                    <tr><td className="py-2 px-2">TikTok y LIVE</td><td className="py-2 px-2 text-right font-bold">10 min</td></tr>
-                    <tr><td className="py-2 px-2">WhatsApp, agente y pedido</td><td className="py-2 px-2 text-right font-bold text-emerald-400">15 min</td></tr>
-                    <tr><td className="py-2 px-2">Analítica, reputación y plan de aplicación</td><td className="py-2 px-2 text-right font-bold">10 min</td></tr>
-                    <tr><td className="py-2 px-2">Cierre y recursos</td><td className="py-2 px-2 text-right font-bold">5 min</td></tr>
-                    <tr className="bg-slate-800/60"><td className="py-2 px-2 font-black text-white">Total</td><td className="py-2 px-2 text-right font-black text-[#00aeef]">90 min</td></tr>
-                  </tbody>
-                </table>
-                <p className="text-xs text-slate-300">
-                  <strong className="text-[#f59e0b]">Versión de 60 minutos:</strong> Mantener 1 caso conductor, 1 búsqueda, 1 demo de skill, 1 imagen y 1 video, 1 conversación de compra, 1 análisis breve y el plan de 7 días.
-                </p>
-              </div>
-
-              <div className="lg:col-span-7 bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 shadow-2xl flex flex-col justify-between">
-                <div>
-                  <h4 className="text-2xl font-black text-emerald-400 mb-4">36. Preparación Final del Expositor</h4>
-                  <div className="grid sm:grid-cols-2 gap-4 text-xs text-slate-200 mb-4">
-                    <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800">
-                      <strong className="text-white block mb-1">13 Materiales de demostración:</strong>
-                      Ficha del negocio ficticio · Foto de producto · Imagen terminada · Flyer terminado · Carrusel completo · Video con avatar · Video centrado en producto · Capturas de controles · Catálogo de prueba · Base del agente · Registro de pedidos ficticios · Analítica histórica con fecha · QR de descarga verificado.
-                    </div>
-                    <div className="bg-[#16161a] p-4 rounded-2xl border border-slate-800 space-y-2">
-                      <p><strong className="text-[#00aeef] block">Secuencia técnica (5 pasos):</strong> 1. Mostrar objetivo → 2. Identificar recursos de entrada → 3. Ejecutar proceso → 4. Revisar resultado → 5. Explicar qué haría el emprendedor después.</p>
-                      <p><strong className="text-[#f59e0b] block">Si falla Internet:</strong> Continuar con el material preparado y explicar las decisiones.</p>
-                      <p><strong className="text-rose-400 block">Si la IA comete un error:</strong> Usarlo para enseñar revisión: identificar qué cambió, comparar con referencia, pedir corrección concreta y volver a comprobar.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-blue-950/50 border border-[#00aeef]/40 p-5 rounded-2xl text-center">
-                  <strong className="text-[#00aeef] text-xs uppercase tracking-widest block mb-1">Frase que acompaña toda la conferencia</strong>
-                  <p className="text-base sm:text-lg font-black text-white">“Una pregunta del cliente puede convertirse en contenido. Ese contenido puede iniciar una conversación. Y una conversación bien atendida puede convertirse en una compra y una relación duradera.”</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- SECCIÓN 35: 10 PREGUNTAS FRECUENTES -->
-            <div className="bg-slate-900 border border-slate-700 rounded-[3.5rem] p-8 md:p-12 mb-16 shadow-2xl">
-              <h4 className="text-2xl md:text-3xl font-black text-white text-center mb-8">35. Respuestas a las 10 Preguntas Frecuentes</h4>
-              <div className="grid md:grid-cols-2 gap-4">
-                ${faqs.map((f, i) => html`
-                  <div key=${i} className="bg-[#16161a] border border-slate-800 p-5 rounded-2xl">
-                    <strong className="text-[#f59e0b] text-sm block mb-1">${f.q}</strong>
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">${f.a}</p>
-                  </div>
-                `)}
-              </div>
-            </div>
-
-            <!-- SECCIÓN 33: GUION DE CIERRE + PERFIL DE HUGO LÓPEZ -->
-            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#0f172a] rounded-[3rem] md:rounded-[4rem] p-8 md:p-16 border-2 border-[#00aeef]/50 shadow-[0_0_80px_rgba(0,174,239,0.25)]">
-              <div className="grid lg:grid-cols-12 gap-10 items-center">
-                <div className="lg:col-span-4 flex flex-col items-center text-center">
-                  <div className="w-44 h-44 sm:w-48 sm:h-48 rounded-full border-[5px] border-[#00aeef] overflow-hidden shadow-[0_0_40px_rgba(0,174,239,0.5)] mb-5">
-                    <img src=${HUGO_PHOTO} alt="Hugo López" className="w-full h-full object-cover object-top" />
-                  </div>
-                  <span className="text-xs font-black uppercase tracking-widest text-[#f59e0b]">33. Guion de Cierre · Expositor Oficial</span>
-                  <h4 className="text-3xl font-black text-white mt-1">Hugo López</h4>
-                  <p className="text-lg font-bold text-[#00aeef] mt-0.5">El Marketero del Pueblo</p>
-                  <p className="text-xs text-blue-200 mt-1">Open Summit · Gobierno Regional Metropolitano de Lima</p>
-                </div>
-                <div className="lg:col-span-8 text-center lg:text-left space-y-4">
-                  <p className="text-lg md:text-2xl text-white font-medium leading-relaxed">
-                    “Hoy hemos conectado varias partes de un negocio. Primero entendimos qué necesita saber el cliente. Después organizamos esa información, creamos contenido y vimos cómo llevar a la persona hacia una consulta.”
-                  </p>
-                  <p className="text-lg md:text-2xl text-slate-200 font-medium leading-relaxed">
-                    “Pero también revisamos qué pasa después: confirmar, cobrar, entregar y atender. La inteligencia artificial puede ayudarnos en ese recorrido, siempre que le demos información real y revisemos lo que produce.”
-                  </p>
-                  <p className="text-xl md:text-2xl text-[#00aeef] font-black leading-relaxed">
-                    “Mi propuesta es que esta semana elijan un producto o servicio, preparen su catálogo, respondan tres preguntas con contenido y registren sus consultas y pedidos. Comiencen con una mejora que puedan sostener. Ese será el primer paso para convertir lo aprendido hoy en una forma de trabajar.”
-                  </p>
-                  <div className="pt-4">
-                    <a href="https://www.tiktok.com/@hugolopez.pe" target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 bg-white text-[#1e3a8a] px-8 py-4 rounded-full text-lg sm:text-xl font-black hover:bg-[#f59e0b] hover:text-white transition-all shadow-2xl">
-                      DESCARGAR SKILLS EN TIKTOK @HUGOLOPEZ.PE <${ArrowUpRight} className="w-6 h-6"/>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -1749,28 +750,27 @@ Reglas:
     const Footer = () => html`
       <footer className="bg-[#0f172a] text-slate-400 pt-16 pb-12 border-t-[8px] border-[#f59e0b]">
         <div className="container mx-auto px-6 text-center max-w-[1400px]">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-10 mb-12">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-10 mb-10">
             <div className="bg-white p-4 rounded-3xl shadow-lg inline-block">
               <img src=${GOV_LOGO} alt="Logo Gobierno Regional Metropolitano de Lima" className="h-16 sm:h-20 w-auto object-contain" />
             </div>
-            <div className="w-px h-24 bg-slate-700 hidden md:block"></div>
-            <div className="text-center md:text-left max-w-xl text-base sm:text-lg leading-relaxed">
-              <strong className="text-white block mb-1 text-xl">Open Summit — Gobierno Regional Metropolitano de Lima</strong>
-              Inteligencia artificial + ecommerce para emprendedores · Auditorio Casa de la Juventud, Surquillo · Jueves 22 de octubre de 2026 · 3:00 p. m.
+            <div className="w-px h-20 bg-slate-700 hidden md:block"></div>
+            <div className="text-center md:text-left max-w-xl text-lg leading-relaxed">
+              <strong className="text-white block mb-1 text-2xl">Open Summit 2026 — Gobierno Regional Metropolitano de Lima</strong>
+              Inteligencia Artificial + Ecommerce para Emprendedores.
             </div>
-            <div className="w-px h-24 bg-slate-700 hidden md:block"></div>
+            <div className="w-px h-20 bg-slate-700 hidden md:block"></div>
             <div className="flex items-center gap-4 bg-slate-900/90 border border-slate-700 p-4 rounded-3xl">
               <img src=${HUGO_PHOTO} alt="Hugo López" className="w-16 h-16 rounded-full object-cover object-top border-2 border-[#00aeef]" />
               <div className="text-left pr-2">
                 <span className="text-xs font-black uppercase text-[#f59e0b] block">Expositor</span>
                 <span className="text-lg font-black text-white block">Hugo López</span>
-                <span className="text-xs font-bold text-[#00aeef]">El Marketero del Pueblo</span>
+                <span className="text-xs font-bold text-[#00aeef]">@hugolopez.pe</span>
               </div>
             </div>
           </div>
           <p className="text-sm text-slate-500 border-t border-slate-800 pt-8">
-            © 2026 Gobierno Regional Metropolitano de Lima · Open Summit x Hugo López (El Marketero del Pueblo).<br/>
-            Base de Conocimientos Integral para Emprendedores de Productos y Servicios.
+            © 2026 Gobierno Regional Metropolitano de Lima · Open Summit x Hugo López (El Marketero del Pueblo).
           </p>
         </div>
       </footer>
@@ -1780,17 +780,13 @@ Reglas:
       <div className="font-sans text-slate-100 bg-[#0a0a0a] scroll-smooth selection:bg-[#00aeef] selection:text-white">
         <${Header} />
         <${Hero} />
-        <${PropositoYApertura} />
-        <${EcommerceYOferta} />
-        <${InvestigacionYPilares} />
-        <${SkillsYGoogleFlowIntro} />
-        <${FlowProduccionVisual} />
-        <${TikTokVideoPerfilYLive} />
-        <${WhatsAppYMetaAgent} />
-        <${PedidoPagosMargenYPublicidad} />
-        <${ReputacionPosventaYAnalitica} />
-        <${RecorridoIntegradoYPlan7Dias} />
-        <${RegaloCierreYPreparacion} />
+        <${PerfilHugo} />
+        <${EcommerceSinWeb} />
+        <${TikTokLiveYBusquedas} />
+        <${DirectorioIA} />
+        <${GoogleFlowSection} />
+        <${SkillsYRegalo} />
+        <${WhatsAppYAnalitica} />
         <${Footer} />
       </div>
     `;
